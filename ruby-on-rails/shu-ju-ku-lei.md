@@ -2,6 +2,8 @@
 
 ## NullDB Connection Adapter
 
+> [https://github.com/nulldb/nulldb](https://github.com/nulldb/nulldb)
+
 当我们在本地执行`RAILS_ENV=production rails assets:precompile`编译资源时，会提示我们production数据库不存在，通过Gem `activerecord-nulldb-adapter` 可以避免创建数据库
 
 {% code-tabs %}
