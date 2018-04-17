@@ -17,6 +17,7 @@
   * [工具](kubernetes/gong-ju.md)
   * [通过Rancher管理Kubernetes](kubernetes/tong-guo-rancher-guan-li-kubernetes/README.md)
     * [RBAC集成](kubernetes/tong-guo-rancher-guan-li-kubernetes/rbac-ji-cheng.md)
-* [日志管理](ri-zhi-guan-li.md)
+* [日志管理](ri-zhi-guan-li/README.md)
+  * [Fluentd](ri-zhi-guan-li/fluentd.md)
 * [Mac 软件](mac-ruan-jian.md)
 
