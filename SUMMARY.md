@@ -15,4 +15,5 @@
 * Ruby on Rails
   * [数据库类](ruby-on-rails/shu-ju-ku-lei.md)
 * [日志管理](ri-zhi-guan-li.md)
+* [Mac 软件](mac-ruan-jian.md)
 
