@@ -4,6 +4,7 @@
 * [Kubernetes](kubernetes/README.md)
   * [参考资源](kubernetes/can-kao-zi-yuan.md)
   * [工具](kubernetes/gong-ju.md)
+  * [通过Rancher管理Kubernetes](kubernetes/tong-guo-rancher-guan-li-kubernetes.md)
 * 前端模板
   * [Bootstrap 模板](qian-duan-mo-ban/bootstrap-mo-ban/README.md)
     * [图表类](qian-duan-mo-ban/bootstrap-mo-ban/tu-biao-lei.md)
