@@ -1,16 +1,27 @@
-# Tanmer
+---
+description: Tanmer的心路历程
+---
 
-## Ruby & Rails
-- 常用的Gems
-- 开发文档
-- 教程
-- 案例
+# 探码科技-发开日志
 
-## Vue
-- 常用的Vue插件
-- 开发文档
-- 教程
-- 案例
+## Getting Super Powers
 
-## NPM
-- 常用的NPM插件
+Becoming a super hero is a fairly straight forward process:
+
+```
+$ give me super-powers
+```
+
+{% hint style="info" %}
+ Super-powers are granted randomly so please submit an issue if you're not happy with yours.
+{% endhint %}
+
+Once you're strong enough, save the world:
+
+```
+// Ain't no code for that yet, sorry
+echo 'You got to trust me on this, I saved the world'
+```
+
+
+
