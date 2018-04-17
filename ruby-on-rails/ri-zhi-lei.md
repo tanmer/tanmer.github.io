@@ -6,5 +6,9 @@
 
 > {% embed data="{\"url\":\"https://github.com/actindi/act-fluent-logger-rails\",\"type\":\"link\",\"title\":\"actindi/act-fluent-logger-rails\",\"description\":\"act-fluent-logger-rails - Fluent logger\",\"icon\":{\"type\":\"icon\",\"url\":\"https://github.com/fluidicon.png\",\"aspectRatio\":0},\"thumbnail\":{\"type\":\"thumbnail\",\"url\":\"https://avatars0.githubusercontent.com/u/87465?s=400&v=4\",\"width\":420,\"height\":420,\"aspectRatio\":1}}" %}
 
+相关文章：
+
+> Collecting and Analyzing Ruby on Rails Logs [https://www.fluentd.org/datasources/rails](https://www.fluentd.org/datasources/rails)
+
 
 
