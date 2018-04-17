@@ -11,4 +11,6 @@
     * [图表类](qian-duan-mo-ban/bootstrap-mo-ban/tu-biao-lei.md)
     * [Profile 类页面](qian-duan-mo-ban/bootstrap-mo-ban/profile-lei-ye-mian.md)
     * [Bootstrap模板资源站](qian-duan-mo-ban/bootstrap-mo-ban/bootstrap-mo-ban-zi-yuan-zhan.md)
+* Ruby on Rails
+  * [数据库类](ruby-on-rails/shu-ju-ku-lei.md)
 
