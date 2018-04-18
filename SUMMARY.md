@@ -9,6 +9,7 @@
 * Ruby on Rails
   * [数据库类](ruby-on-rails/shu-ju-ku-lei.md)
   * [日志类](ruby-on-rails/ri-zhi-lei.md)
+  * [价格字段的单位转换](ruby-on-rails/jia-ge-zi-duan-de-dan-wei-fen-yuan-zhi-jian-zi-dong-zhuan-huan.md)
 * Docker
   * [Docker日志收集最佳实践](docker/docker-ri-zhi-shou-ji-zui-jia-shi-jian.md)
 * [Kubernetes](kubernetes/README.md)
