@@ -96,5 +96,5 @@ end
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-以上代码，足够应付我们的价格前后端单位转换问题。如果需要更高级额功能，我们可以尝试Gem \[money\]\([https://github.com/RubyMoney/money](https://github.com/RubyMoney/money)\) 或 \[money-rails\]\([https://github.com/RubyMoney/money-rails](https://github.com/RubyMoney/money-rails)\)
+以上代码，足够应付我们的价格前后端单位转换问题。如果需要更高级额功能，我们可以尝试Gem [money](https://github.com/RubyMoney/money) 或 [money-rails](https://github.com/RubyMoney/money-rails)
 
