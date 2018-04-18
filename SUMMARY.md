@@ -5,11 +5,11 @@
   * [Bootstrap 模板](qian-duan/bootstrap-mo-ban/README.md)
     * [图表类](qian-duan/bootstrap-mo-ban/tu-biao-lei.md)
     * [Profile 类页面](qian-duan/bootstrap-mo-ban/profile-lei-ye-mian.md)
-  * [JS Chart图标](qian-duan/js-chart-tu-biao.md)
+  * [JS Chart图表](qian-duan/js-chart-tu-biao.md)
 * Ruby on Rails
   * [数据库类](ruby-on-rails/shu-ju-ku-lei.md)
   * [日志类](ruby-on-rails/ri-zhi-lei.md)
-  * [价格字段的单位转换](ruby-on-rails/jia-ge-zi-duan-de-dan-wei-fen-yuan-zhi-jian-zi-dong-zhuan-huan.md)
+  * [价格字段的单位转换](ruby-on-rails/jia-ge-zi-duan-de-dan-wei-zhuan-huan.md)
 * Docker
   * [Docker日志收集最佳实践](docker/docker-ri-zhi-shou-ji-zui-jia-shi-jian.md)
 * [Kubernetes](kubernetes/README.md)

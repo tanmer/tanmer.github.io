@@ -28,7 +28,7 @@ class Product < ApplicationRecord
     def price
         (price_cents || 0) / 100.0
     end
-    
+
     def price=(v)
         # 这里用.round就是为了解决上面的911.99999999问题
         self.price_cents = (v.to_f * 100).round
@@ -44,7 +44,6 @@ end
 def product_params
     params.require(:product).permit(:name, :price)
 end
-
 ```
 {% endcode-tabs-item %}
 {% endcode-tabs %}
@@ -60,21 +59,21 @@ end
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-### 封装一下代码，做到足够DRY
+## 封装一下代码，做到足够DRY
 
 {% code-tabs %}
 {% code-tabs-item title="app/models/application\_record.rb" %}
 ```ruby
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
-  
+
   class << self
     def price_attr(model_attr, db_attr="#{model_attr}_cents")
       class_eval <<-CODE, __FILE__, __LINE__ + 1
         def #{model_attr}
           (#{db_attr} || 0) / 100.0
         end
-        
+
         def #{model_attr}=(v)
           self.#{db_attr} = (v.to_f * 100).round
         end
