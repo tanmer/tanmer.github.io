@@ -1,4 +1,4 @@
-# JS Chart图标
+# JS Chart图表
 
 ## morris.js
 
