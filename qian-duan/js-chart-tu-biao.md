@@ -6,5 +6,5 @@
 >
 > {% embed data="{\"url\":\"http://morrisjs.github.io/morris.js/\#getting\_started\",\"type\":\"link\",\"title\":\"morris.js\"}" %}
 
-![](../.gitbook/assets/image%20%283%29.png)
+![](../.gitbook/assets/image%20%281%29.png)
 
