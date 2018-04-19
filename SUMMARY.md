@@ -20,6 +20,7 @@
 * [日志管理](ri-zhi-guan-li/README.md)
   * [Fluentd](ri-zhi-guan-li/fluentd.md)
 * [VirtualBox](virtualbox.md)
-* [Mac 软件](mac-ruan-jian/README.md)
+* [工具软件](mac-ruan-jian/README.md)
   * [代码版本控制工具](mac-ruan-jian/dai-ma-ban-ben-kong-zhi-gong-ju.md)
+  * [Atom](mac-ruan-jian/atom.md)
 
