@@ -25,6 +25,5 @@
   * [代码版本控制工具](mac-ruan-jian/dai-ma-ban-ben-kong-zhi-gong-ju.md)
   * [Atom](mac-ruan-jian/atom.md)
   * [Bash Shell](mac-ruan-jian/bash-shell.md)
-* Untitled
 * 图片资源
 
