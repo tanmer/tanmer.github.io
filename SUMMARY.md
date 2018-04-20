@@ -6,7 +6,7 @@
     * [图表类](qian-duan/bootstrap-mo-ban/tu-biao-lei.md)
     * [Profile 类页面](qian-duan/bootstrap-mo-ban/profile-lei-ye-mian.md)
   * [JS Chart图表](qian-duan/js-chart-tu-biao.md)
-  * [Css3](qian-duan/css3.md)
+  * Css3
 * Ruby on Rails
   * [数据库类](ruby-on-rails/shu-ju-ku-lei.md)
   * [日志类](ruby-on-rails/ri-zhi-lei.md)
