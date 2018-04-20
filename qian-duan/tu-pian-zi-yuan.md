@@ -16,3 +16,7 @@ description: icon图标库集合
 
 
 
+[FontAwesome图标库](https://fontawesome.com/icons?from=io)
+
+![](../.gitbook/assets/fontawsome.png)
+
