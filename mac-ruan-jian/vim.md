@@ -245,7 +245,7 @@ filetype plugin indent on    " required
 
 NERDTree是Vim的文件系统浏览器，通过这个插件，用户能够可视化地查看目录结构，快速打开，查看和编辑文件。该插件还可以通过特定的API自定义功能映射。
 
-![](../.gitbook/assets/image%20%2813%29.png)
+![](../.gitbook/assets/image%20%2814%29.png)
 
 #### 如何安装
 
@@ -270,7 +270,7 @@ Plugin 'scrooloose/nerdtree'
 vim +PluginInstall
 ```
 
-![](../.gitbook/assets/image%20%2810%29.png)
+![](../.gitbook/assets/image%20%2811%29.png)
 
 
 
