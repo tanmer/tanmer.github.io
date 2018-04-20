@@ -6,6 +6,7 @@
     * [图表类](qian-duan/bootstrap-mo-ban/tu-biao-lei.md)
     * [Profile 类页面](qian-duan/bootstrap-mo-ban/profile-lei-ye-mian.md)
   * [JS Chart图表](qian-duan/js-chart-tu-biao.md)
+  * [Icon图标库](qian-duan/tu-pian-zi-yuan.md)
   * Css3
 * Ruby on Rails
   * [数据库类](ruby-on-rails/shu-ju-ku-lei.md)
@@ -25,5 +26,4 @@
   * [代码版本控制工具](mac-ruan-jian/dai-ma-ban-ben-kong-zhi-gong-ju.md)
   * [Atom](mac-ruan-jian/atom.md)
   * [Bash Shell](mac-ruan-jian/bash-shell.md)
-* [图片资源](tu-pian-zi-yuan.md)
 
