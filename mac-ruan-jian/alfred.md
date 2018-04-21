@@ -48,5 +48,4 @@ description: 取代Mac自带的Spotlight search
 
 这里，我的翻墙profile目录是`Profile 4`
 
-下载我制作好的workflow文件
-
+下载我制作好的workflow文件 [gfw.alfredworkflow](.gitbook/assets/gfw.alfredworkflow) , 打开workflows
