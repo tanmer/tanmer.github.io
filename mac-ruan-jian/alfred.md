@@ -48,4 +48,13 @@ description: 取代Mac自带的Spotlight search
 
 这里，我的翻墙profile目录是`Profile 4`
 
-下载我制作好的workflow文件 [gfw.alfredworkflow](.gitbook/assets/gfw.alfredworkflow) , 打开workflows
+下载我制作好的workflow文件 [gfw.alfredworkflow](https://github.com/tanmer/tanmer.github.io/raw/master/.gitbook/assets/gfw.alfredworkflow) , 打开workflows, 双击`/bin/bash`节点，修改`Profile 4`为你自己的翻墙目录
+
+```
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" $1 --profile-directory="Profile 4"
+```
+
+### 开始使用
+
+Alfred搜索条中试试输入`fq`,`gem`,`github`,`superu`,`stackof`
+
