@@ -1,20 +1,16 @@
 # Kubernetes
 
-## 15.0.0 - 2042-12-03
+官网 [https://kubernetes.io/](https://kubernetes.io/)
 
-### Fixed
+#### [Kubernetes](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/) is an open-source system for automating deployment, scaling, and management of containerized applications.
 
-* Removed humans, they weren't doing fine with animals.
 
-### Changed
 
-* Animals are now super cute, all of them.
+{% page-ref page="can-kao-zi-yuan.md" %}
 
-## 14.0.0 - 2042-10-06
+{% page-ref page="gong-ju.md" %}
 
-### Added
-
-* Introduced animals into the world, we believe they're going to be a neat addition.
+{% page-ref page="tong-guo-rancher-guan-li-kubernetes/" %}
 
 
 
