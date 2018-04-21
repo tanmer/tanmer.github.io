@@ -6,7 +6,7 @@
 
 
 
-{% page-ref page="can-kao-zi-yuan.md" %}
+{% page-ref page="references.md" %}
 
 {% page-ref page="gong-ju.md" %}
 

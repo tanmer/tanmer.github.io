@@ -342,7 +342,159 @@ xiaohui@node1:~$ kubectl get no
 NAME      STATUS    ROLES     AGE       VERSION
 node1     Ready     master    51m       v1.10.1
 node2     Ready     <none>    34m       v1.10.1
+
+xiaohui@tanmer-dev:~$ kubectl get po --all-namespaces -o wide
+NAMESPACE     NAME                            READY     STATUS    RESTARTS   AGE       IP           NODE
+kube-system   etcd-node1                      1/1       Running   0          1h        10.0.1.10    node1
+kube-system   kube-apiserver-node1            1/1       Running   0          1h        10.0.1.10    node1
+kube-system   kube-controller-manager-node1   1/1       Running   0          1h        10.0.1.10    node1
+kube-system   kube-dns-86f4d74b45-lhf58       3/3       Running   2          1h        10.244.0.3   node1
+kube-system   kube-flannel-ds-fwd78           1/1       Running   0          34m       10.0.1.11    node2
+kube-system   kube-flannel-ds-hpf5s           1/1       Running   0          34m       10.0.1.10    node1
+kube-system   kube-proxy-4vf42                1/1       Running   0          43m       10.0.1.11    node2
+kube-system   kube-proxy-kvv94                1/1       Running   0          1h        10.0.1.10    node1
+kube-system   kube-scheduler-node1            1/1       Running   0          1h        10.0.1.10    node1
 ```
 
+##  安装Dashboard
 
+```bash
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+```
+
+这里，又需要翻墙下载镜像 `k8s.gcr.io/kubernetes-dashboard-amd64:v1.8.3`
+
+> 官方文档：[https://github.com/kubernetes/dashboard](https://github.com/kubernetes/dashboard)
+
+Dashboard启动之后，通过下面命令，代理API端口
+
+```bash
+kubectl proxy
+```
+
+然后访问 [http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)
+
+![](../.gitbook/assets/image%20%289%29.png)
+
+### 需要创建一个帐号
+
+这里需要创建一个帐号才能访问。
+
+{% code-tabs %}
+{% code-tabs-item title="admin-user.yaml" %}
+```yaml
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kube-system
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+```bash
+kubectl apply -f admin-user.yaml
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
+```
+
+把输出的Token填入网站
+
+![](../.gitbook/assets/image%20%283%29.png)
+
+![](../.gitbook/assets/image%20%2822%29.png)
+
+### 安装Heapster
+
+> 官方文档：[https://github.com/kubernetes/heapster](https://github.com/kubernetes/heapster)
+
+这里又是翻墙下载镜像：
+
+```text
+k8s.gcr.io/heapster-influxdb-amd64:v1.3.3
+k8s.gcr.io/heapster-amd64:v1.4.2
+k8s.gcr.io/heapster-grafana-amd64:v4.4.3
+```
+
+```bash
+# 安装influxdb
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/influxdb.yaml
+# 安装heapster
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/heapster.yaml
+# 安装grafana
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/grafana.yaml
+# 分配权限
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/rbac/heapster-rbac.yaml
+```
+
+这里Grafana的内部端口是`3000`，如果需要外网访问，可以修改一下deploy配置，设置密码保护，然后通过Ingress绑定域名实现外网访问。
+
+现在能够看到，`Heapster`和`monitoring-grafana`已经安装成功
+
+![](../.gitbook/assets/image%20%288%29.png)
+
+Grafana service by default requests for a LoadBalancer. If that is not available in your cluster, consider changing that to NodePort. Use the external IP assigned to the Grafana service, to access Grafana. The default user name and password is 'admin'. Once you login to Grafana, add a datasource that is InfluxDB. The URL for InfluxDB will be `http://INFLUXDB_HOST:INFLUXDB_PORT`. Database name is 'k8s'. Default user name and password is 'root'.
+
+Grafana访问地址：
+
+```text
+http://localhost:8001/api/v1/namespaces/kube-system/services/monitoring-grafana/proxy
+```
+
+现在，Dashboard就能看到服务器的资源使用情况了
+
+![](../.gitbook/assets/image%20%2812%29.png)
+
+## 安装Weave Scope
+
+Weave Scope是一个Kubernetes的可视化监控工具，通过他可以总览整个集群构架，实时诊断容器。
+
+安装非常简单，一个命令搞定，最重要的是不用翻墙：
+
+```bash
+kubectl apply -f "https://cloud.weave.works/k8s/scope.yaml?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+```
+
+```text
+xiaohui@node1:~$ kubectl -n weave get all
+NAME                                   READY     STATUS    RESTARTS   AGE
+pod/weave-scope-agent-lwxk9            1/1       Running   0          1m
+pod/weave-scope-agent-mfdnc            1/1       Running   0          1m
+pod/weave-scope-app-69f8c6745d-sfj75   1/1       Running   0          1m
+
+NAME                      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/weave-scope-app   ClusterIP   10.102.231.71   <none>        80/TCP    1m
+
+NAME                               DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemonset.apps/weave-scope-agent   2         2         2         2            2           <none>          1m
+
+NAME                              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/weave-scope-app   1         1         1            1           1m
+
+NAME                                         DESIRED   CURRENT   READY     AGE
+replicaset.apps/weave-scope-app-69f8c6745d   1         1         1         1m
+```
+
+映射Pod端口到本地`4040`端口
+
+```bash
+kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')" 4040
+```
+
+本地浏览器访问 [http://localhost:4040](http://localhost:4040)
+
+![](../.gitbook/assets/image%20%2811%29.png)
 
