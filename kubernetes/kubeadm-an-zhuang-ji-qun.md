@@ -374,7 +374,7 @@ kubectl proxy
 
 然后访问 [http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)
 
-![](../.gitbook/assets/image%20%289%29.png)
+![](../.gitbook/assets/image%20%2810%29.png)
 
 ### 需要创建一个帐号
 
@@ -415,7 +415,7 @@ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | gre
 
 ![](../.gitbook/assets/image%20%283%29.png)
 
-![](../.gitbook/assets/image%20%2822%29.png)
+![](../.gitbook/assets/image%20%2824%29.png)
 
 ### 安装Heapster
 
@@ -444,7 +444,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/de
 
 现在能够看到，`Heapster`和`monitoring-grafana`已经安装成功
 
-![](../.gitbook/assets/image%20%288%29.png)
+![](../.gitbook/assets/image%20%289%29.png)
 
 Grafana service by default requests for a LoadBalancer. If that is not available in your cluster, consider changing that to NodePort. Use the external IP assigned to the Grafana service, to access Grafana. The default user name and password is 'admin'. Once you login to Grafana, add a datasource that is InfluxDB. The URL for InfluxDB will be `http://INFLUXDB_HOST:INFLUXDB_PORT`. Database name is 'k8s'. Default user name and password is 'root'.
 
@@ -456,7 +456,7 @@ http://localhost:8001/api/v1/namespaces/kube-system/services/monitoring-grafana/
 
 现在，Dashboard就能看到服务器的资源使用情况了
 
-![](../.gitbook/assets/image%20%2812%29.png)
+![](../.gitbook/assets/image%20%2813%29.png)
 
 ## 安装Weave Scope
 
@@ -496,5 +496,172 @@ kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope
 
 本地浏览器访问 [http://localhost:4040](http://localhost:4040)
 
-![](../.gitbook/assets/image%20%2811%29.png)
+![](../.gitbook/assets/image%20%2812%29.png)
+
+## 安装Ingress
+
+要让服务能够被外部网络通过域名访问，我们需要安装Ingress。
+
+官方文档：[https://kubernetes.io/docs/concepts/services-networking/ingress/](https://kubernetes.io/docs/concepts/services-networking/ingress/)
+
+这里我们可以使用官方的[`ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/master/README.md)或[`traefik`](https://traefik.io/)，这里我们选用功能更完善的`traefik`
+
+### Traefik
+
+![](../.gitbook/assets/image%20%288%29.png)
+
+参考文档：
+
+[https://github.com/rootsongjc/kubernetes-handbook/blob/master/practice/edge-node-configuration.md](https://github.com/rootsongjc/kubernetes-handbook/blob/master/practice/edge-node-configuration.md)
+
+以下配置文件可以在[kubernetes-handbook](https://github.com/rootsongjc/kubernetes-handbook)GitHub仓库中的[../manifests/traefik-ingress/](https://github.com/rootsongjc/kubernetes-handbook/blob/master/manifests/traefik-ingress/)目录下找到。
+
+#### 创建服务帐号
+
+{% code-tabs %}
+{% code-tabs-item title="ingress-rbac.yaml" %}
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ingress
+  namespace: kube-system
+
+---
+
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: ingress
+subjects:
+  - kind: ServiceAccount
+    name: ingress
+    namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+```bash
+kubectl apply -f ingress-rbac.yaml
+```
+
+#### 部署Traefik DaemonSet
+
+{% code-tabs %}
+{% code-tabs-item title="traefik.yaml" %}
+```yaml
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: traefik-ingress-lb
+  namespace: kube-system
+  labels:
+    k8s-app: traefik-ingress-lb
+spec:
+  template:
+    metadata:
+      labels:
+        k8s-app: traefik-ingress-lb
+        name: traefik-ingress-lb
+    spec:
+      terminationGracePeriodSeconds: 60
+      hostNetwork: true
+      restartPolicy: Always
+      serviceAccountName: ingress
+      containers:
+      - image: traefik
+        name: traefik-ingress-lb
+        resources:
+          limits:
+            cpu: 200m
+            memory: 30Mi
+          requests:
+            cpu: 100m
+            memory: 20Mi
+        ports:
+        - name: http
+          containerPort: 80
+          hostPort: 80
+        - name: admin
+          containerPort: 8580
+          hostPort: 8580
+        args:
+        - --web
+        - --web.address=:8580
+        - --kubernetes
+      nodeSelector:
+        edgenode: "true"
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+```bash
+kubectl apply -f traefik.yaml
+```
+
+{% hint style="info" %}
+注意：我们使用了nodeSelector选择边缘节点来调度traefik-ingress-lb运行在它上面，所有你需要使用：
+{% endhint %}
+
+```bash
+kubectl label nodes node2 edgenode=true
+```
+
+可以看到，应用已经启动了
+
+```bash
+xiaohui@tanmer-dev:~$ kubectl -n kube-system get ds
+NAME                 DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR                   AGE
+kube-flannel-ds      2         2         2         2            2           beta.kubernetes.io/arch=amd64   3h
+kube-proxy           2         2         2         2            2           <none>                          3h
+traefik-ingress-lb   1         1         1         1            1           edgenode=true                   1m
+```
+
+现在开启Web端管理服务，域名`traefik-ui.local`指向UI
+
+{% code-tabs %}
+{% code-tabs-item title="traefik-ui.yaml" %}
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-web-ui
+  namespace: kube-system
+spec:
+  selector:
+    k8s-app: traefik-ingress-lb
+  ports:
+  - name: web
+    port: 80
+    targetPort: 8580
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-web-ui
+  namespace: kube-system
+spec:
+  rules:
+  - host: traefik-ui.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: traefik-web-ui
+          servicePort: web
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+```bash
+kubectl apply -f traefik-ui.yaml
+```
+
+本地电脑改一下/etc/hosts文件，指向node2就能访问traefik web UI了
+
+![](../.gitbook/assets/image%20%2815%29.png)
 
