@@ -6,7 +6,7 @@ description: 取代Mac自带的Spotlight search
 
 ## 自动通过翻墙浏览器上网
 
-![](.gitbook/assets/image%20%287%29.png)
+![](../.gitbook/assets/image%20%287%29.png)
 
 ### 原理
 
@@ -30,21 +30,21 @@ description: 取代Mac自带的Spotlight search
 
 双击下载的文件，workflow会自动添加到Alfred
 
-![](.gitbook/assets/image%20%281%29.png)
+![](../.gitbook/assets/image%20%281%29.png)
 
 双击cr
 
-![](.gitbook/assets/image%20%2816%29.png)
+![](../.gitbook/assets/image%20%2816%29.png)
 
 点下面圆圈处，会打开Finder
 
-![](.gitbook/assets/image%20%285%29.png)
+![](../.gitbook/assets/image%20%285%29.png)
 
 ### 找出翻墙Profile所在的目录名
 
 在bash中执行alfred-chrome文件，会输出JSON文件，从中找出自己配置的翻墙profile的目录名
 
-![](.gitbook/assets/image%20%283%29.png)
+![](../.gitbook/assets/image%20%283%29.png)
 
 这里，我的翻墙profile目录是`Profile 4`
 

@@ -23,10 +23,10 @@
   * [Fluentd](ri-zhi-guan-li/fluentd.md)
 * [VirtualBox](virtualbox.md)
 * [工具软件](mac-ruan-jian/README.md)
+  * [Alfred](mac-ruan-jian/alfred.md)
   * [代码版本控制工具](mac-ruan-jian/dai-ma-ban-ben-kong-zhi-gong-ju.md)
   * [Atom](mac-ruan-jian/atom.md)
   * [Bash Shell](mac-ruan-jian/bash-shell.md)
   * [Vim](mac-ruan-jian/vim.md)
   * [fzf\(Fuzzy Finder\)](mac-ruan-jian/fzf-fuzzy-finder.md)
-* [Alfred](alfred.md)
 
