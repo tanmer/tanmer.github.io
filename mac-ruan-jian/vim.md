@@ -237,6 +237,27 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 ```
 
+### 通过Vundle安装插件
+
+{% code-tabs %}
+{% code-tabs-item title="~/.vimrc" %}
+```text
+Plugin 'scrooloose/nerdtree'
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+{% code-tabs %}
+{% code-tabs-item title="vim 编辑器中执行" %}
+```text
+:source %
+:PlugInstall
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+
+
 ## 常用插件
 
 ### NERDTree
@@ -245,7 +266,7 @@ filetype plugin indent on    " required
 
 NERDTree是Vim的文件系统浏览器，通过这个插件，用户能够可视化地查看目录结构，快速打开，查看和编辑文件。该插件还可以通过特定的API自定义功能映射。
 
-![](../.gitbook/assets/image%20%2814%29.png)
+![](../.gitbook/assets/image%20%2819%29.png)
 
 #### 如何安装
 
@@ -264,13 +285,14 @@ Plugin 'scrooloose/nerdtree'
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-命令行安装插件
+安装插件
 
-```bash
-vim +PluginInstall
+```text
+:source %
+:PluginInstall
 ```
 
-![](../.gitbook/assets/image%20%2811%29.png)
+![](../.gitbook/assets/image%20%2815%29.png)
 
 
 
