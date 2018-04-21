@@ -28,4 +28,5 @@
   * [Bash Shell](mac-ruan-jian/bash-shell.md)
   * [Vim](mac-ruan-jian/vim.md)
   * [fzf\(Fuzzy Finder\)](mac-ruan-jian/fzf-fuzzy-finder.md)
+* [Alfred](alfred.md)
 
