@@ -31,4 +31,5 @@
   * [Bash Shell](gong-ju-ruan-jian/bash-shell.md)
   * [Vim](gong-ju-ruan-jian/vim.md)
   * [fzf\(Fuzzy Finder\)](gong-ju-ruan-jian/fzf-fuzzy-finder.md)
+* [Ubuntu](ubuntu.md)
 
