@@ -50,7 +50,7 @@ description: 取代Mac自带的Spotlight search
 
 下载我制作好的workflow文件 [gfw.alfredworkflow](https://github.com/tanmer/tanmer.github.io/raw/master/.gitbook/assets/gfw.alfredworkflow) , 打开workflows, 双击`/bin/bash`节点，修改`Profile 4`为你自己的翻墙目录
 
-```
+```text
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" $1 --profile-directory="Profile 4"
 ```
 
