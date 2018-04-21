@@ -384,7 +384,7 @@ vboxmanage startvm node2 --type headless
 
 从`node1`克隆为`node2`之后，她的hostname没有改变，这里需要修改：
 
-```text
+```bash
 sudo sed -i 's/node1/node2/' /etc/hosts
 sudo sed -i 's/node1/node2/' /etc/hostname
 sudo hostname node2
@@ -392,16 +392,18 @@ sudo hostname node2
 
 IP地址的设置也需要修改
 
-```text
+```bash
 sudo vi /etc/networking/interfaces
 ```
 
 启动克隆后的虚拟机，如果是Bridged网路可能会无法上网。可以通过一下方式解决：
 
-```text
+```bash
 vboxmanage controlvm node2 poweroff
 vboxmanage modifyvm node2 --nic1 none
 vboxmanage modifyvm node2 --nic1 bridged
 vboxmanage startvm node2 --type headless
 ```
+
+
 
