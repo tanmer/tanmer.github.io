@@ -18,6 +18,7 @@
   * [Docker日志收集最佳实践](docker/docker-ri-zhi-shou-ji-zui-jia-shi-jian.md)
 * [Kubernetes](kubernetes/README.md)
   * [参考资源](kubernetes/can-kao-zi-yuan.md)
+  * [Kubeadm安装集群](kubernetes/kubeadm-an-zhuang-ji-qun.md)
   * [工具](kubernetes/gong-ju.md)
   * [通过Rancher管理Kubernetes](kubernetes/tong-guo-rancher-guan-li-kubernetes/README.md)
     * [RBAC集成](kubernetes/tong-guo-rancher-guan-li-kubernetes/rbac-ji-cheng.md)
