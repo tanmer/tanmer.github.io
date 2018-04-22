@@ -841,3 +841,46 @@ spec:
 EOS
 ```
 
+## 翻墙下载镜像汇总
+
+```bash
+从国外下载镜像
+
+images=(
+k8s.gcr.io/pause-amd64:3.1
+k8s.gcr.io/etcd-amd64:3.1.12
+k8s.gcr.io/kube-apiserver-amd64:v1.10.1
+k8s.gcr.io/kube-controller-manager-amd64:v1.10.1
+k8s.gcr.io/kube-scheduler-amd64:v1.10.1
+k8s.gcr.io/kube-proxy-amd64:v1.10.1
+k8s.gcr.io/k8s-dns-sidecar-amd64:1.14.8
+k8s.gcr.io/k8s-dns-dnsmasq-nanny-amd64:1.14.8
+k8s.gcr.io/k8s-dns-kube-dns-amd64:1.14.8
+k8s.gcr.io/kubernetes-dashboard-amd64:v1.8.3
+k8s.gcr.io/heapster-influxdb-amd64:v1.3.3
+k8s.gcr.io/heapster-amd64:v1.4.2
+k8s.gcr.io/heapster-grafana-amd64:v4.4.3
+k8s.gcr.io/kube-keepalived-vip:0.11
+)
+
+for sourceImageName in ${images[@]} ; do
+    targetImageName=docker.corp.tanmer.com/tanmer/dockers/${sourceImageName}
+    (    docker pull ${sourceImageName} \
+      && docker tag ${sourceImageName} ${targetImageName} \
+      && docker push ${targetImageName} \
+      && docker rmi ${targetImageName} \
+    ) || break
+done
+
+
+恢复镜像到国内
+
+for targetImageName in ${images[@]} ; do
+    sourceImageName=docker.corp.tanmer.com/tanmer/dockers/${targetImageName}
+    (    docker pull ${sourceImageName} \
+      && docker tag ${sourceImageName} ${targetImageName} \
+      && docker rmi ${sourceImageName} \
+    ) || break
+done
+```
+
