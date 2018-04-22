@@ -11,6 +11,18 @@ curl https://releases.rancher.com/install-docker/1.12.sh | sh
 
 脚本来自Rancher [https://rancher.com/docs/rancher/v1.6/en/hosts/\#supported-docker-versions](https://rancher.com/docs/rancher/v1.6/en/hosts/#supported-docker-versions)
 
+### 修改镜像为国内源
+
+{% code-tabs %}
+{% code-tabs-item title="/etc/docker/daemon.json" %}
+```javascript
+{
+    "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
 ## 安装kubeadm和kubectl
 
 这里需要翻墙，参考 [Ubuntu](https://doc.tanmer.cn/ubuntu) 中的翻墙技巧
