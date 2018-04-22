@@ -68,8 +68,10 @@ sudo vi /etc/fstab
 因为k8s的镜像都在Google服务器行，我们不翻墙是无法访问的。
 
 ```bash
-sudo kubeadm init
+sudo kubeadm init --apiserver-cert-extra-sans=k8s-api.prod
 ```
+
+这里`--apiserver-cert-extra-sans=k8s-api.prod`是为了以后支持高可用master集群，统一一个域名，省去后期麻烦。
 
 ### 监视Docker日志
 
