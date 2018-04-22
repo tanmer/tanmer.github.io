@@ -356,7 +356,7 @@ docker rmi docker.corp.tanmer.com/tanmer/dockers/flannel:v0.9.1-amd64
 
 ### 开始安装
 
-```text
+```yaml
 cat <<EOS|kubectl apply -f -
 ---
 kind: ClusterRole
@@ -495,7 +495,7 @@ spec:
         - name: flannel-cfg
           configMap:
             name: kube-flannel-cfg
-  EOS
+EOS
 ```
 
 现在查看集群状态，所有`STATUS`都变成了`Ready`
