@@ -2,7 +2,7 @@
 description: 实现栏目下划线跟随效果
 ---
 
-# tranform-origin + transform + transition
+# tranform-origin + transform
 
 自己可以先简单的实现 hover 默认的两种状态实现下滑线滑动
 

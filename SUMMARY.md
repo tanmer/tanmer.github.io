@@ -8,7 +8,7 @@
   * [JS Chart图表](qian-duan/js-chart-tu-biao.md)
   * [Icon图标库](qian-duan/icon-tu-biao-ku.md)
   * Css3
-    * [tranform-origin + transform + transition](qian-duan/css3/tranform-origin-+-transform-+-transition.md)
+    * [tranform-origin + transform](qian-duan/css3/tranform-origin-+-transform-+-transition.md)
 * Ruby
   * Ruby on Rails
     * [数据库类](ruby/ruby-on-rails/shu-ju-ku-lei.md)
