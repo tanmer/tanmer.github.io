@@ -11,13 +11,16 @@ curl https://releases.rancher.com/install-docker/1.12.sh | sh
 
 脚本来自Rancher [https://rancher.com/docs/rancher/v1.6/en/hosts/\#supported-docker-versions](https://rancher.com/docs/rancher/v1.6/en/hosts/#supported-docker-versions)
 
-### 修改镜像为国内源
+### 配置Docker
+
+修改为国内源，修改数据目录为/data/docker
 
 {% code-tabs %}
 {% code-tabs-item title="/etc/docker/daemon.json" %}
 ```javascript
 {
-    "registry-mirrors": ["https://registry.docker-cn.com"]
+    "registry-mirrors": ["https://registry.docker-cn.com"],
+    "graph": "/data/docker"
 }
 ```
 {% endcode-tabs-item %}
