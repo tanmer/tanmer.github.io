@@ -949,12 +949,15 @@ EOS
 
 ```bash
 cat <<EOS|kubectl apply -f -
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: kube-keepalived-vip
   namespace: kube-system
 spec:
+  selector:
+    matchLabels:
+      name: kube-keepalived-vip
   template:
     metadata:
       labels:
@@ -987,6 +990,7 @@ spec:
           # to use unicast
           args:
           - --services-configmap=kube-system/vip-configmap
+          - --watch-all-namespaces
           # unicast uses the ip of the nodes instead of multicast
           # this is useful if running in cloud providers (like AWS)
           #- --use-unicast=true
@@ -1000,7 +1004,7 @@ spec:
           hostPath:
             path: /dev
       nodeSelector:
-        edgenode: "true"
+        type: "worker"
 EOS
 ```
 
