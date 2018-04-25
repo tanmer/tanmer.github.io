@@ -37,5 +37,11 @@ apt install iputils-ping -y
 apt install dnsutils -y
 ```
 
+### ps
+
+```bash
+apt install procps
+```
+
 
 
