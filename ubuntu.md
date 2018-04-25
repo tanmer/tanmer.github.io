@@ -45,6 +45,28 @@ tim                      ether   00:22:ff:ff:ff:af   C                     eth0
 10.10.0.13               ether   60:be:ff:ff:ff:e0   C                     eth0
 ```
 
+### iperf
+
+> 带宽测试
+
+```bash
+apt install iperf
+```
+
+测试方法：准备2台 Linux 云主机（例如CentOS 6.5），一台做server，一台做client，云主机推荐配置为 2核4G
+
+server端命令如下：
+
+```bash
+iperf -s
+```
+
+client端命令如下：
+
+```text
+iperf -c 10.x.x.x(server内网IP) -i 2 -t 30 -P 50
+```
+
 ### ping
 
 > 检查IP知否联网
