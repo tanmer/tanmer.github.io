@@ -860,12 +860,17 @@ Public ----(example.com = 10.4.0.50)----|-----| Host IP: 10.4.0.4 |
 
 #### 开始安装
 
-添加权限：
+创建服务帐号：
 
 ```bash
 kubectl -n kube-system create sa kube-keepalived-vip
+```
 
+添加权限：
+
+```bash
 cat <<EOS|kubectl apply -f -
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -879,9 +884,7 @@ rules:
   - services
   - configmaps
   verbs: ["get", "list", "watch"]
-EOS
-
-cat <<EOS|kubectl apply -f -
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
