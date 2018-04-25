@@ -681,9 +681,8 @@ kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope
 
 #### 创建服务帐号
 
-{% code-tabs %}
-{% code-tabs-item title="ingress-rbac.yaml" %}
-```yaml
+```bash
+cat <<EOS|kubectl apply -f -
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -704,19 +703,13 @@ roleRef:
   kind: ClusterRole
   name: cluster-admin
   apiGroup: rbac.authorization.k8s.io
-```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
-
-```bash
-kubectl apply -f ingress-rbac.yaml
+EOS
 ```
 
 #### 部署Traefik DaemonSet
 
-{% code-tabs %}
-{% code-tabs-item title="traefik.yaml" %}
-```yaml
+```bash
+cat <<EOS|kubectl apply -f -
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
@@ -758,12 +751,7 @@ spec:
         - --kubernetes
       nodeSelector:
         edgenode: "true"
-```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
-
-```bash
-kubectl apply -f traefik.yaml
+  EOS
 ```
 
 {% hint style="info" %}
@@ -786,9 +774,8 @@ traefik-ingress-lb   1         1         1         1            1           edge
 
 现在开启Web端管理服务，域名`traefik-ui.local`指向UI
 
-{% code-tabs %}
-{% code-tabs-item title="traefik-ui.yaml" %}
-```yaml
+```bash
+cat <<EOS|kubectl apply -f -
 apiVersion: v1
 kind: Service
 metadata:
@@ -816,12 +803,7 @@ spec:
         backend:
           serviceName: traefik-web-ui
           servicePort: web
-```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
-
-```bash
-kubectl apply -f traefik-ui.yaml
+EOS
 ```
 
 本地电脑改一下/etc/hosts文件，指向node2就能访问traefik web UI了
