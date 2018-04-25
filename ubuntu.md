@@ -23,5 +23,19 @@ sudo apt-get install dnsmasq
 sudo mv ~/dnsmasq.conf /etc/dnsmasq.conf
 ```
 
+## 安装软件
+
+### ping
+
+```bash
+apt install iputils-ping -y
+```
+
+### nslookup
+
+```bash
+apt install dnsutils -y
+```
+
 
 
