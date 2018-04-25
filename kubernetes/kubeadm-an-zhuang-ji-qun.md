@@ -751,7 +751,7 @@ spec:
         - --kubernetes
       nodeSelector:
         edgenode: "true"
-  EOS
+EOS
 ```
 
 {% hint style="info" %}
