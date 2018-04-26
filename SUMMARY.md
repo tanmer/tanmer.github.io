@@ -2,11 +2,12 @@
 
 * [探码科技-发开日志](README.md)
 * 前端
-  * [Bootstrap 模板](qian-duan/bootstrap-mo-ban/README.md)
+  * Bootstrap 模板
     * [图表类](qian-duan/bootstrap-mo-ban/tu-biao-lei.md)
     * [Profile 类页面](qian-duan/bootstrap-mo-ban/profile-lei-ye-mian.md)
   * [JS Chart图表](qian-duan/js-chart-tu-biao.md)
-  * [Icon图标库](qian-duan/icon-tu-biao-ku.md)
+  * [Icon图标库](qian-duan/icon-tu-biao-ku/README.md)
+    * [图片库](qian-duan/icon-tu-biao-ku/tu-pian-ku.md)
   * Css3
     * [tranform-origin + transform](qian-duan/css3/tranform-origin-+-transform-+-transition.md)
 * Ruby
