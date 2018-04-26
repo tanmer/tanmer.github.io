@@ -10,7 +10,7 @@
   * [Icon图标库](qian-duan/icon-tu-biao-ku.md)
   * Css3
     * [tranform-origin + transform](qian-duan/css3/tranform-origin-+-transform-+-transition.md)
-  * 用Sass颜色函数控制颜色
+  * [用Sass颜色函数控制颜色](qian-duan/yong-sass-yan-se-han-shu-kong-zhi-yan-se.md)
 * Ruby
   * Ruby on Rails
     * [数据库类](ruby/ruby-on-rails/shu-ju-ku-lei.md)
