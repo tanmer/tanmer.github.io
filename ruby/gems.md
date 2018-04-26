@@ -48,3 +48,13 @@ ActiveRecord模型层次结构 [https://github.com/ClosureTree/closure\_tree](ht
 
 为Rails模型和控制器生成UML类图 [https://github.com/preston/railroady](https://github.com/preston/railroady)
 
+### Httparty
+
+Http访问 [https://github.com/jnunemaker/httparty](https://github.com/jnunemaker/httparty)
+
+### RequestStore
+
+全局存储请求 [https://github.com/steveklabnik/request\_store](https://github.com/steveklabnik/request_store)
+
+
+
