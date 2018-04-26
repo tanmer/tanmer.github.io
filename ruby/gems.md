@@ -32,3 +32,7 @@ HTTP客户端 [https://github.com/lostisland/faraday](https://github.com/lostisl
 
 ActiveRecord模型层次结构 [https://github.com/ClosureTree/closure\_tree](https://github.com/ClosureTree/closure_tree)
 
+### Browser
+
+判断浏览器类型 [https://github.com/fnando/browser](https://github.com/fnando/browser)
+
