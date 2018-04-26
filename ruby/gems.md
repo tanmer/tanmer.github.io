@@ -36,3 +36,15 @@ ActiveRecord模型层次结构 [https://github.com/ClosureTree/closure\_tree](ht
 
 判断浏览器类型 [https://github.com/fnando/browser](https://github.com/fnando/browser)
 
+### impressionist
+
+访问统计 [https://github.com/charlotte-ruby/impressionist](https://github.com/charlotte-ruby/impressionist)
+
+### Rails-ERD
+
+为Rails生成实体关系图 [https://github.com/voormedia/rails-erd](https://github.com/voormedia/rails-erd)
+
+### RailRoady
+
+为Rails模型和控制器生成UML类图 [https://github.com/preston/railroady](https://github.com/preston/railroady)
+
