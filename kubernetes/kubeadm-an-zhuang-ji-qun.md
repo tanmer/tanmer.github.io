@@ -1,6 +1,6 @@
 # Kubeadm安装集群
 
-官方文档：[https://kubernetes.io/docs/setup/independent/install-kubeadm/](https://kubernetes.io/docs/setup/independent/install-kubeadm/)
+\官方文档：[https://kubernetes.io/docs/setup/independent/install-kubeadm/](https://kubernetes.io/docs/setup/independent/install-kubeadm/)
 
 ## 安装Docker 1.12
 
@@ -173,13 +173,17 @@ done
 # 重置刚才的集群命令
 kubeadm reset
 # 重新初始化
-kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-cert-extra-sans=k8s-api.prod
+kubeadm init --pod-network-cidr=10.244.0.0/16 \
+             --apiserver-cert-extra-sans=k8s-api.prod \
+             --kubernetes-version 1.10.1
 ```
 
 {% hint style="info" %}
-这里用到了参数`--pod-network-cidr=10.244.0.0/16` 是因为我们使用`Flannel`网络，会在后面配置。
+--pod-network-cidr=10.244.0.0/16 是因为我们使用Flannel网络，会在后面配置。
 
-这里`--apiserver-cert-extra-sans=k8s-api.prod`是为了以后支持高可用master集群，统一一个域名，省去后期麻烦。
+--apiserver-cert-extra-sans=k8s-api.prod 是为了以后支持高可用master集群，统一一个域名，省去后期麻烦。
+
+--kubernetes-version=1.10.1 指定k8s版本
 {% endhint %}
 
 初始化成功之后，输入如下：
