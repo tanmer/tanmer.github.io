@@ -552,9 +552,8 @@ kubectl proxy
 
 这里需要创建一个帐号才能访问。
 
-{% code-tabs %}
-{% code-tabs-item title="admin-user.yaml" %}
-```yaml
+```bash
+cat <<EOS|kubectl apply -f -
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -574,12 +573,8 @@ subjects:
 - kind: ServiceAccount
   name: admin-user
   namespace: kube-system
-```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+EOS
 
-```bash
-kubectl apply -f admin-user.yaml
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
 ```
 
