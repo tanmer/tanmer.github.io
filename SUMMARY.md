@@ -37,5 +37,6 @@
   * [Bash Shell](gong-ju-ruan-jian/bash-shell.md)
   * [Vim](gong-ju-ruan-jian/vim.md)
   * [fzf\(Fuzzy Finder\)](gong-ju-ruan-jian/fzf-fuzzy-finder.md)
-* [Ubuntu](ubuntu.md)
+* [Ubuntu](ubuntu/README.md)
+  * [安装 VPN服务](ubuntu/an-zhuang-vpn-fu-wu.md)
 
