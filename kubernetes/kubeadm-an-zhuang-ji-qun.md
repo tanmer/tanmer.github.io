@@ -27,6 +27,10 @@ curl https://releases.rancher.com/install-docker/1.12.sh | sh
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
+{% hint style="warning" %}
+注意：如果\`storage-driver\`是\`aufs\`，那么参数\`graph\`无法使用，会导致docker重启失败。从docker CE版本开始，storage driver就推荐使用\`overlay2\`
+{% endhint %}
+
 ## 安装kubeadm和kubectl
 
 这里需要翻墙，参考 [Ubuntu](https://doc.tanmer.cn/ubuntu) 中的翻墙技巧
