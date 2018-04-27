@@ -39,4 +39,5 @@
   * [fzf\(Fuzzy Finder\)](gong-ju-ruan-jian/fzf-fuzzy-finder.md)
 * [Ubuntu](ubuntu/README.md)
   * [安装 VPN服务](ubuntu/an-zhuang-vpn-fu-wu.md)
+  * [安装DNSMasq](ubuntu/an-zhuang-dnsmasq.md)
 
