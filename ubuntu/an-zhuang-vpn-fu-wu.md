@@ -310,6 +310,14 @@ push "redirect-gateway def1 bypass-dhcp"
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
+`push "redirect-gateway def1 bypass-dhcp"` 会路由所有流量到VPN服务器，而有时我们只需要访问VPN背后的局域网，那么我们可以改为：
+
+```text
+push "route 10.9.0.0 255.255.0.0"
+```
+
+`10.9.0.0 255.255.0.0`是VPN背后的局域网。
+
 Just below this, find the `dhcp-option` section. Again, remove the ";" from in front of both of the lines to uncomment them:
 
 {% code-tabs %}
