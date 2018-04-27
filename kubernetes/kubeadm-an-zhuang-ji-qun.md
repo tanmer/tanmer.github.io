@@ -20,6 +20,7 @@ curl https://releases.rancher.com/install-docker/1.12.sh | sh
 ```javascript
 {
     "registry-mirrors": ["https://registry.docker-cn.com"],
+    "storage-driver": "overlay2",
     "graph": "/data/docker"
 }
 ```
