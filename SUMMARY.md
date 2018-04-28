@@ -17,6 +17,7 @@
     * [日志类](ruby/ruby-on-rails/ri-zhi-lei.md)
     * [价格字段的单位转换](ruby/ruby-on-rails/jia-ge-zi-duan-de-dan-wei-zhuan-huan.md)
     * [部署](ruby/ruby-on-rails/bu-shu.md)
+    * [根据设备类型自动渲染](ruby/ruby-on-rails/gen-ju-she-bei-lei-xing-zi-dong-ran.md)
   * [Gems](ruby/gems.md)
 * [Docker](docker/README.md)
   * [Docker日志收集最佳实践](docker/logging.md)
