@@ -6,8 +6,11 @@
 
 #### 创建用户
 
-参考文档： [https://docs.bitnami.com/kubernetes/how-to/configure-rbac-in-your-kubernetes-cluster/](https://docs.bitnami.com/kubernetes/how-to/configure-rbac-in-your-kubernetes-cluster/)
+参考文档： 
 
+* [https://docs.bitnami.com/kubernetes/how-to/configure-rbac-in-your-kubernetes-cluster/](https://docs.bitnami.com/kubernetes/how-to/configure-rbac-in-your-kubernetes-cluster/)
+* [https://kubernetes.io/docs/admin/authorization/rbac/\#role-examples](https://kubernetes.io/docs/admin/authorization/rbac/#role-examples)
+* 
 **第一步：生成用户证书**
 
 在k8s master节点执行：
@@ -117,4 +120,10 @@ Error from server (Forbidden): pods is forbidden: User "wenlg" cannot list pods 
 {% endcode-tabs %}
 
 至此，创建一个用户，设定访问权限就完成了。
+
+### Webhook Token
+
+参考文档：[https://kubernetes.io/docs/admin/authentication/\#webhook-token-authentication](https://kubernetes.io/docs/admin/authentication/#webhook-token-authentication)
+
+
 
