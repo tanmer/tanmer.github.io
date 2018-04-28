@@ -29,8 +29,9 @@ openssl x509 -req -in ${cert_user}.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /et
 
 ```bash
 cert_user=wenlg
+cert_namespace=office
 kubectl config set-credentials ${cert_user} --client-certificate=$(realpath ~/.certs/${cert_user}.crt)  --client-key=$(realpath ~/.certs/${cert_user}.key)
-kubectl config set-context ${cert_user}@kubernetes --cluster=kubernetes --user=${cert_user}
+kubectl config set-context ${cert_user}@kubernetes --cluster=kubernetes --user=${cert_user} --namespace=${cert_namespace}
 ```
 
 本地执行，如果提示`Error from server (Forbidden): pods is forbidden: User "wenlg" cannot list pods in the namespace "default" `就说明证书可以了。
@@ -44,11 +45,12 @@ kubectl --context=${cert_user}@kubernetes get pods
 创建一个角色`deployment-manager`：
 
 ```bash
+kubectl create namespace ${cert_namespace}
 cat <<EOS|kubectl apply -f -
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  namespace: default
+  namespace: ${cert_namespace}
   name: deployment-manager
 rules:
 - apiGroups: ["", "extensions", "apps"]
@@ -65,7 +67,7 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: deployment-manager-binding
-  namespace: default
+  namespace: ${cert_namespace}
 subjects:
 - kind: User
   name: ${cert_user}
@@ -99,5 +101,20 @@ po/httpbin-5c5449d8b8-qr2dz   1/1       Running   0          47s
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
+尝试访问`default` namespace的资源
 
+```bash
+kubectl --context=${cert_user}@kubernetes get po --namespace=default
+```
+
+{% code-tabs %}
+{% code-tabs-item title="Output" %}
+```text
+➜  ~ kubectl --context=${cert_user}@kubernetes get po --namespace=default
+Error from server (Forbidden): pods is forbidden: User "wenlg" cannot list pods in the namespace "default"
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+至此，创建一个用户，设定访问权限就完成了。
 
