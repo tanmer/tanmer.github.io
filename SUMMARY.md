@@ -26,6 +26,7 @@
   * [参考资源](kubernetes/references.md)
   * [Kubeadm安装集群](kubernetes/kubeadm-an-zhuang-ji-qun/README.md)
     * [RBAC用户管理](kubernetes/kubeadm-an-zhuang-ji-qun/rbac-yong-hu-guan-li.md)
+    * [创建etcd集群](kubernetes/kubeadm-an-zhuang-ji-qun/chuang-jian-etcd-ji-qun.md)
   * [通过Rancher管理Kubernetes](kubernetes/tong-guo-rancher-guan-li-kubernetes/README.md)
     * [RBAC集成](kubernetes/tong-guo-rancher-guan-li-kubernetes/rbac-ji-cheng.md)
   * [工具](kubernetes/gong-ju.md)
@@ -42,5 +43,6 @@
 * [Ubuntu](ubuntu/README.md)
   * [安装 VPN服务](ubuntu/an-zhuang-vpn-fu-wu.md)
   * [安装DNSMasq](ubuntu/an-zhuang-dnsmasq.md)
+  * [Keepalived](ubuntu/keepalived.md)
 * [Git](git.md)
 
