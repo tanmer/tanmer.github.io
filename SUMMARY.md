@@ -32,6 +32,7 @@
   * [rke方式安装Kubernetes](kubernetes/rke-fang-shi-an-zhuang-ji-qun.md)
   * [RBAC用户管理](kubernetes/rbac-yong-hu-guan-li.md)
   * [创建etcd集群](kubernetes/chuang-jian-etcd-ji-qun.md)
+  * [Kubeapps](kubernetes/kubeapps.md)
   * [工具](kubernetes/gong-ju.md)
 * [日志管理](ri-zhi-guan-li/README.md)
   * [Fluentd](ri-zhi-guan-li/fluentd.md)
