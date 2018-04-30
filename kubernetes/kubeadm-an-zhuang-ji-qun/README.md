@@ -1,6 +1,6 @@
 # Kubeadm安装集群
 
-\官方文档：[https://kubernetes.io/docs/setup/independent/install-kubeadm/](https://kubernetes.io/docs/setup/independent/install-kubeadm/)
+官方文档：[https://kubernetes.io/docs/setup/independent/install-kubeadm/](https://kubernetes.io/docs/setup/independent/install-kubeadm/)
 
 ## 安装Docker 1.12
 
@@ -605,6 +605,14 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/de
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/grafana.yaml
 # 分配权限
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/rbac/heapster-rbac.yaml
+```
+
+这里我把k8s.gcr.io/heapster-influxdb-amd64:v1.3.3镜像到了tanmerk8s/heapster-influxdb-amd64:v1.3.3，所以下面这个方法更简单
+
+```bash
+curl https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/influxdb.yaml | sed 's!image: k8s.gcr.io/!image: tanmerk8s/!' | kubectl apply -f -
+curl https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/heapster.yaml | sed 's!image: k8s.gcr.io/!image: tanmerk8s/!' | kubectl apply -f -
+curl https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/grafana.yaml | sed 's!image: k8s.gcr.io/!image: tanmerk8s/!' | kubectl apply -f -
 ```
 
 这里Grafana的内部端口是`3000`，如果需要外网访问，可以修改一下deploy配置，设置密码保护，然后通过Ingress绑定域名实现外网访问。
