@@ -34,6 +34,7 @@
   * [创建etcd集群](kubernetes/chuang-jian-etcd-ji-qun.md)
   * [Kubeapps](kubernetes/kubeapps.md)
   * [工具](kubernetes/gong-ju.md)
+  * [GlusterFS](kubernetes/glusterfs.md)
 * [日志管理](ri-zhi-guan-li/README.md)
   * [Fluentd](ri-zhi-guan-li/fluentd.md)
 * [VirtualBox](virtualbox.md)

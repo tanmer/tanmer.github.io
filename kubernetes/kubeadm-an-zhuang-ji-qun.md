@@ -582,7 +582,7 @@ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | gre
 
 ![](../.gitbook/assets/image%20%283%29.png)
 
-![](../.gitbook/assets/image%20%2825%29.png)
+![](../.gitbook/assets/image%20%2826%29.png)
 
 ### 安装Heapster
 
