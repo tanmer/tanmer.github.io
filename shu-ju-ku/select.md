@@ -35,6 +35,20 @@ create database test;
 
 ## Select
 
+> 用来对表中数据做筛选
+
+查询 &lt;表名&gt; 所有列信息:
+
+```text
+select * from <表名>;   <=>    rails: Table_name.all
+```
+
+查询 &lt;表名&gt; 中 &lt;列名1&gt;、&lt;列名2&gt; 的所有内容
+
+```text
+select <列名1>, <列名2> from <表名>;
+```
+
 ## Delete
 
 > 用来删除行
