@@ -52,4 +52,6 @@
   * [安装DNSMasq](ubuntu/an-zhuang-dnsmasq.md)
   * [Keepalived](ubuntu/keepalived.md)
 * [Git](git.md)
+* Nginx
+  * [使用stream模块实现负载均衡](nginx/shi-yong-stream-mo-kuai-shi-xian-fu-zai-jun-heng.md)
 
