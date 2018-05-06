@@ -33,7 +33,7 @@ openssl x509 -req -in ${cert_user}.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /et
 ```bash
 cert_user=wenlg
 cert_namespace=office
-kubectl config set-credentials ${cert_user} --client-certificate=$(realpath ~/.certs/${cert_user}.crt)  --client-key=$(realpath ~/.certs/${cert_user}.key)
+kubectl config set-credentials ${cert_user} --client-certificate=$(realpath ~/.certs/${cert_user}.crt)  --client-key=$(realpath ~/.certs/${cert_user}.key) --embed-certs=true
 kubectl config set-context ${cert_user}@kubernetes --cluster=kubernetes --user=${cert_user} --namespace=${cert_namespace}
 ```
 

@@ -33,6 +33,7 @@
     * [RBAC集成](kubernetes/tong-guo-rancher-guan-li-kubernetes/rbac-ji-cheng.md)
   * [rke方式安装Kubernetes](kubernetes/rke-fang-shi-an-zhuang-ji-qun.md)
   * [RBAC用户管理](kubernetes/rbac-yong-hu-guan-li.md)
+  * [Traefik配置](kubernetes/traefik-pei-zhi.md)
   * [创建etcd集群](kubernetes/chuang-jian-etcd-ji-qun.md)
   * [Kubeapps](kubernetes/kubeapps.md)
   * [工具](kubernetes/gong-ju.md)
