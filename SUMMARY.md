@@ -38,6 +38,7 @@
   * [Kubeapps](kubernetes/kubeapps.md)
   * [工具](kubernetes/gong-ju.md)
   * [GlusterFS](kubernetes/glusterfs.md)
+  * [安装Helm](kubernetes/an-zhuang-helm.md)
 * [日志管理](ri-zhi-guan-li/README.md)
   * [Fluentd](ri-zhi-guan-li/fluentd.md)
 * [VirtualBox](virtualbox.md)

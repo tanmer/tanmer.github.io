@@ -2,6 +2,8 @@
 
 官方文档：[https://github.com/containous/traefik/blob/master/docs/configuration/backends/kubernetes.md](https://github.com/containous/traefik/blob/master/docs/configuration/backends/kubernetes.md)
 
+## 部署traefik
+
 执行下面代码，即可以部署`traefix`
 
 ```bash
@@ -167,4 +169,8 @@ spec:
 支持的`annotations` 列表：[https://github.com/containous/traefik/blob/master/docs/configuration/backends/kubernetes.md\#general-annotations](https://github.com/containous/traefik/blob/master/docs/configuration/backends/kubernetes.md#general-annotations)
 
 重定向`http`到`https`: `traefik.ingress.kubernetes.io/redirect-entry-point: https`
+
+## 注册Let'sencrypt账号
+
+
 
