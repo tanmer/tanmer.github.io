@@ -21,9 +21,9 @@
   * [Gems](ruby/gems.md)
   * [Automating your API with JSON Schema](ruby/automating-your-api-with-json-schema.md)
 * 数据库
-  * [Create , Select , Delete](shu-ju-ku/select.md)
-  * [select  jsonb](shu-ju-ku/select-jsonb.md)
-  * [PostgreSQL](shu-ju-ku/postgresql.md)
+  * [PostgreSQL](shu-ju-ku/postgresql/README.md)
+    * [Create , Select , Delete](shu-ju-ku/postgresql/select.md)
+    * [select  jsonb](shu-ju-ku/postgresql/select-jsonb.md)
 * [Docker](docker/README.md)
   * [Docker日志收集最佳实践](docker/logging.md)
   * [Harbor搭建私有镜像服务](docker/harbor.md)
