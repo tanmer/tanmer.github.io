@@ -20,6 +20,7 @@
     * [根据设备类型自动渲染页面](ruby/ruby-on-rails/gen-ju-she-bei-lei-xing-zi-dong-ran.md)
   * [Gems](ruby/gems.md)
   * [Automating your API with JSON Schema](ruby/automating-your-api-with-json-schema.md)
+  * [Deep freeze](ruby/deep-freeze.md)
 * 数据库
   * [PostgreSQL](shu-ju-ku/postgresql/README.md)
     * [Create , Select , Delete](shu-ju-ku/postgresql/select.md)
