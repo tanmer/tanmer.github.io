@@ -41,6 +41,7 @@
   * [工具](kubernetes/gong-ju.md)
   * [GlusterFS](kubernetes/glusterfs.md)
   * [安装Helm](kubernetes/an-zhuang-helm.md)
+  * [亲和度配置](kubernetes/qin-he-du-pei-zhi.md)
 * [日志管理](ri-zhi-guan-li/README.md)
   * [Fluentd](ri-zhi-guan-li/fluentd.md)
 * [VirtualBox](virtualbox.md)
