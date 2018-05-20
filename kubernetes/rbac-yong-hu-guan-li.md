@@ -37,7 +37,7 @@ kubectl config set-credentials ${cert_user} --client-certificate=$(realpath ~/.c
 kubectl config set-context ${cert_user}@kubernetes --cluster=kubernetes --user=${cert_user} --namespace=${cert_namespace}
 ```
 
-本地执行，如果提示`Error from server (Forbidden): pods is forbidden: User "wenlg" cannot list pods in the namespace "default" `就说明证书可以了。
+本地执行，如果提示`Error from server (Forbidden): pods is forbidden: User "wenlg" cannot list pods in the namespace "default"` 就说明证书可以了。
 
 ```bash
 kubectl --context=${cert_user}@kubernetes get pods

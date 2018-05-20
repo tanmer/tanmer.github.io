@@ -670,7 +670,7 @@ key-direction 1
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-Finally, add a few commented out lines. We want to include these with every config, but should only enable them for Linux clients that ship with a` /etc/openvpn/update-resolv-conf` file. This script uses the resolvconf utility to update DNS information for Linux clients.
+Finally, add a few commented out lines. We want to include these with every config, but should only enable them for Linux clients that ship with a `/etc/openvpn/update-resolv-conf` file. This script uses the resolvconf utility to update DNS information for Linux clients.
 
 {% code-tabs %}
 {% code-tabs-item title="~/client-configs/base.conf" %}

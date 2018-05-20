@@ -22,5 +22,5 @@ map <Leader>f :FZF<CR>
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-![](../.gitbook/assets/image%20%2823%29.png)
+![](../.gitbook/assets/image%20%2824%29.png)
 

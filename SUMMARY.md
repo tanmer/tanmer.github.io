@@ -25,6 +25,7 @@
   * [PostgreSQL](shu-ju-ku/postgresql/README.md)
     * [Create , Select , Delete](shu-ju-ku/postgresql/select.md)
     * [select  jsonb](shu-ju-ku/postgresql/select-jsonb.md)
+  * [Postgre XL](shu-ju-ku/postgre-xl.md)
 * [Docker](docker/README.md)
   * [Docker日志收集最佳实践](docker/logging.md)
   * [Harbor搭建私有镜像服务](docker/harbor.md)

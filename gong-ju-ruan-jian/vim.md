@@ -10,7 +10,7 @@
 
 ### 多行注释
 
-在需要注释的第一行，按`Ctrl` +`V，`然后按向下方向键，走到想要注释的最后一行，按`i`进入插入模式，输入`# `，按`Esc`退出插入模式，再按一次`Esc`即可实现多行注释。
+在需要注释的第一行，按`Ctrl` +`V，`然后按向下方向键，走到想要注释的最后一行，按`i`进入插入模式，输入`#` ，按`Esc`退出插入模式，再按一次`Esc`即可实现多行注释。
 
 ## 配置详解
 
@@ -274,7 +274,7 @@ Plugin 'scrooloose/nerdtree'
 
 NERDTree是Vim的文件系统浏览器，通过这个插件，用户能够可视化地查看目录结构，快速打开，查看和编辑文件。该插件还可以通过特定的API自定义功能映射。
 
-![](../.gitbook/assets/image%20%2829%29.png)
+![](../.gitbook/assets/image%20%2830%29.png)
 
 #### 如何安装
 
@@ -300,7 +300,7 @@ Plugin 'scrooloose/nerdtree'
 :PluginInstall
 ```
 
-![](../.gitbook/assets/image%20%2824%29.png)
+![](../.gitbook/assets/image%20%2825%29.png)
 
 
 
