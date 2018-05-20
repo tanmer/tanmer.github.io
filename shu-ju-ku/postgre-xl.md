@@ -6,6 +6,8 @@ description: '支持Sharding, Replication的大数据用户数据库'
 
 官网：[https://www.postgres-xl.org/](https://www.postgres-xl.org/)
 
+参考：[https://www.jianshu.com/p/82aaf352b772](https://www.jianshu.com/p/82aaf352b772)
+
 ## 概述
 
 Postgres XL，XL是eXtensible Lattice的简写，意识是可扩展的盒子。
