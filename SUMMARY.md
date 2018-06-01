@@ -40,9 +40,10 @@
   * [创建etcd集群](kubernetes/chuang-jian-etcd-ji-qun.md)
   * [Kubeapps](kubernetes/kubeapps.md)
   * [工具](kubernetes/gong-ju.md)
-  * [GlusterFS](kubernetes/glusterfs.md)
   * [安装Helm](kubernetes/an-zhuang-helm.md)
   * [亲和度配置](kubernetes/qin-he-du-pei-zhi.md)
+* 文件系统
+  * [GlusterFS](wen-jian-xi-tong/glusterfs.md)
 * [日志管理](ri-zhi-guan-li/README.md)
   * [Fluentd](ri-zhi-guan-li/fluentd.md)
 * [VirtualBox](virtualbox.md)
