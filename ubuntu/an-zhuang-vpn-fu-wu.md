@@ -456,6 +456,10 @@ COMMIT
 
 Save and close the file when you are finished.
 
+{% hint style="info" %}
+注意：这里的IP`10.8.0.0/8`是VPN分配的地址范围，对应配置在`/etc/openvpn/server.conf`中的`server 10.8.0.0 255.255.0.0`
+{% endhint %}
+
 We need to tell UFW to allow forwarded packets by default as well. To do this, we will open the `/etc/default/ufw` file:
 
 ```bash
