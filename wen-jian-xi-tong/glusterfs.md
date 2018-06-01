@@ -6,7 +6,7 @@ k8s集群中，怎么也会遇到数据持久化的问题，需要用到PV和PVC
 
 [https://kubernetes.io/docs/concepts/storage/storage-classes/](https://kubernetes.io/docs/concepts/storage/storage-classes/)
 
-![](../.gitbook/assets/image%20%2818%29.png)
+![](../.gitbook/assets/image%20%2819%29.png)
 
 ## 开始安装 
 

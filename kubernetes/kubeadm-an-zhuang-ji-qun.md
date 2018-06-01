@@ -582,7 +582,7 @@ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | gre
 
 ![](../.gitbook/assets/image%20%283%29.png)
 
-![](../.gitbook/assets/image%20%2827%29.png)
+![](../.gitbook/assets/image%20%2829%29.png)
 
 ### 安装Heapster
 
@@ -820,7 +820,7 @@ EOS
 
 本地电脑改一下/etc/hosts文件，指向node2就能访问traefik web UI了
 
-![](../.gitbook/assets/image%20%2816%29.png)
+![](../.gitbook/assets/image%20%2817%29.png)
 
 ## 翻墙下载镜像汇总
 

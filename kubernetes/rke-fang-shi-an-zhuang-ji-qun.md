@@ -101,10 +101,6 @@ NAME            STATUS    ROLES                      AGE       VERSION
 10.10.186.24    Ready     controlplane,etcd,worker   33m       v1.10.1
 ```
 
-### 安装consul
-
-因为我们要用到Traefik作为Ingress服务商，在搭建Traefik高可用集群时，需要用到consul作为KV存储服务。
-
 ### 安装Traefik
 
 安装Traefik之后，我们就能够通过域名访问服务，也可以通过Traefik自动申请证书。

@@ -164,26 +164,24 @@ YAML
 
 ## 部署traefik
 
-执行下面代码，即可以部署`traefix`
+执行下面代码，即可以部署`traefix`，执行前需要修改Email `me@mydomain` 为你自己的，注意，很多教程都没有提到这个Email有什么讲究，其实只要填写你自己真实的Email就可以了，Traefik会自动用你的邮箱去Let's Encrpyt注册账号，自动通过API获取域名验证字符串，Let's Encrpyt验证域名时，Traefik会自动识别URL http://your.domain/.wellknown/xxxx/xxxx \(我忘了具体URL是什么\)，返回验证字符串，实现域名身份验证。这一切都是制动的，你需要做的就是提前把域名解析到Traefik的外网IP，提供一个真实的Email。
+
+3个节点打上标签`edgenode=true`，Traefik会部署在满足这个标签的服务器上:
 
 ```bash
-kubectl apply -f traefik.yml
+kubectl label nodes node1 node2 node3 edgenode=true
 ```
 
-配置文件中，需要注意的的是`ConfigMap`中，acme配置段中的`email`地址，这个地址是需要通过[`certbot`](https://certbot.eff.org/lets-encrypt/osx-other)去注册的，不然无法使用自动tls证书更新的功能。
+开始部署：
 
-{% code-tabs %}
-{% code-tabs-item title="traefik.yml" %}
-```yaml
----
+```bash
+cat <<YAML | kubectl apply -f -
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: ingress
   namespace: kube-system
-
 ---
-
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
@@ -203,16 +201,12 @@ apiVersion: v1
 data:
   traefik.toml: |
     checkNewVersion = false
-    IdleTimeout = "180s"
-    MaxIdleConnsPerHost = 500
     logLevel = "INFO"
-    defaultEntryPoints = ["http", "https"]
+    #defaultEntryPoints = ["http", "https"]
+    defaultEntryPoints = ["http"]
 
     [retry]
     attempts = 3
-
-    [web]
-    address = ":8080"
 
     [entryPoints]
       [entryPoints.http]
@@ -223,13 +217,18 @@ data:
       address = ":443"
         [entryPoints.https.tls]
 
+    [consul]
+    endpoint = "consul.kube-system:8500"
+    watch = true
+    prefix = "traefik"
+
     [acme]
-    email = "xiaohui@tanmer.com"
-    storage = "acme.json"
+    email = "me@mydomain"
+    storage = "traefik/acme/account"
     entryPoint = "https"
-    onDemand = true
     OnHostRule = true
     acmeLogging = true
+    #caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
     [acme.httpChallenge]
     entryPoint = "http"
 
@@ -254,6 +253,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 60
       hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       restartPolicy: Always
       serviceAccountName: ingress
       volumes:
@@ -303,32 +303,34 @@ spec:
   - name: web
     port: 80
     targetPort: 8580
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: traefik-web-ui
-  namespace: kube-system
-  annotations:
-    traefik.ingress.kubernetes.io/frontend-entry-points: http
-spec:
-  rules:
-  - host: traefik.tamigos.in
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: traefik-web-ui
-          servicePort: web
+YAML
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
 这个配置文件，是不会自动`http`重定向到`https`的，需要在独立的`ingress`中去声明`annotations`
 
 支持的`annotations` 列表：[https://github.com/containous/traefik/blob/master/docs/configuration/backends/kubernetes.md\#general-annotations](https://github.com/containous/traefik/blob/master/docs/configuration/backends/kubernetes.md#general-annotations)
 
 重定向`http`到`https`: `traefik.ingress.kubernetes.io/redirect-entry-point: https`
+
+查看部署状态：
+
+```text
+$ kubectl -n kube-system get po -l k8s-app=traefik-ingress-lb
+NAME                       READY     STATUS    RESTARTS   AGE
+traefik-ingress-lb-27bql   1/1       Running   0          2m
+traefik-ingress-lb-78tpl   1/1       Running   0          2m
+traefik-ingress-lb-xqncg   1/1       Running   0          2m
+```
+
+查看Web界面 [http://127.0.0.1:8580](http://127.0.0.1:8580)
+
+```bash
+kubectl -n kube-system port-forward traefik-ingress-lb-27bql 8580
+```
+
+![](../.gitbook/assets/image%20%2828%29.png)
+
+![](../.gitbook/assets/image%20%2816%29.png)
 
 ## 注册Let'sencrypt账号
 
