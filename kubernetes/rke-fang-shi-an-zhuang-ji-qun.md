@@ -10,6 +10,19 @@
 
 下面我们开始正题
 
+## 准备服务器节点
+
+至少3台服务器，保证etcd数据高可用
+
+每台服务器配置ssh密钥登录，让当前运行rke程序的电脑能够无密码登录3台服务器
+
+```text
+mkdir ~/.ssh
+vi ~/.ssh/authorized_keys
+```
+
+把本地公钥`~/.ssh/id_rsa.pub`内容粘贴进3台服务器上的`~/.ssh/authorized_keys`文件
+
 ## 下载rke
 
 rke 的github地址，[https://github.com/rancher/rke](https://github.com/rancher/rke) 在这里，我们可以下载最新版本的rke二进制文件
@@ -34,4 +47,6 @@ rke config
 ```
 
 这个`read-only-port`可以让后面安装的`Heapster`能够获取到节点的硬件资源占用情况。
+
+
 
