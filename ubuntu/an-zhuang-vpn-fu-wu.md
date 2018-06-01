@@ -589,7 +589,7 @@ cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf ~/client-conf
 Open this new file in your text editor:
 
 ```bash
-nano ~/client-configs/base.conf
+vi ~/client-configs/base.conf
 ```
 
 Inside, we need to make a few adjustments.
