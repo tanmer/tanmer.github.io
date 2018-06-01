@@ -2,6 +2,166 @@
 
 官方文档：[https://github.com/containous/traefik/blob/master/docs/configuration/backends/kubernetes.md](https://github.com/containous/traefik/blob/master/docs/configuration/backends/kubernetes.md)
 
+## 安装Consul
+
+因为我们要配置Traefik高可用，数据存储就得用到Consul KV Store。
+
+给3台服务器打上标签，`Consul`会以`StatefulSet`模式安装在上面
+
+```bash
+kubectl label nodes node1 node2 node2 consul=server
+```
+
+创建服务
+
+```bash
+cat <<YAML | kubectl apply -f -
+apiVersion: v1
+kind: Service
+metadata:
+  name: consul
+  namespace: kube-system
+  labels:
+    app: consul
+spec:
+  clusterIP: None
+  ports:
+    - name: http
+      port: 8500
+      targetPort: 8500
+    - name: https
+      port: 8443
+      targetPort: 8443
+    - name: rpc
+      port: 8400
+      targetPort: 8400
+    - name: serflan-tcp
+      protocol: "TCP"
+      port: 8301
+      targetPort: 8301
+    - name: serflan-udp
+      protocol: "UDP"
+      port: 8301
+      targetPort: 8301
+    - name: serfwan-tcp
+      protocol: "TCP"
+      port: 8302
+      targetPort: 8302
+    - name: serfwan-udp
+      protocol: "UDP"
+      port: 8302
+      targetPort: 8302
+    - name: server
+      port: 8300
+      targetPort: 8300
+    - name: consuldns
+      port: 8600
+      targetPort: 8600
+  selector:
+    app: consul
+YAML
+```
+
+创建`StatefulSet`，数据存储在节点的`/mnt/consul`目录
+
+```bash
+cat <<YAML | kubectl apply -f -
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: consul
+  namespace: kube-system
+spec:
+  serviceName: consul
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: consul
+    spec:
+      nodeSelector:
+        consul: server
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: consul
+                    operator: In
+                    values:
+                      - server
+              topologyKey: kubernetes.io/hostname
+      terminationGracePeriodSeconds: 10
+      securityContext:
+        fsGroup: 1000
+      containers:
+      - name: consul
+        image: consul:0.9.2
+        args:
+        - "agent"
+        - "-advertise=\$(POD_IP)"
+        - "-bind=0.0.0.0"
+        - "-bootstrap-expect=3"
+        - "-retry-join=consul-0.consul.\$(NAMESPACE).svc.cluster.local"
+        - "-retry-join=consul-1.consul.\$(NAMESPACE).svc.cluster.local"
+        - "-retry-join=consul-2.consul.\$(NAMESPACE).svc.cluster.local"
+        - "-client=0.0.0.0"
+        - "-datacenter=fr"
+        - "-data-dir=/consul/data"
+        - "-domain=cluster.local"
+        - "-server"
+        - "-ui"
+        - "-disable-host-node-id"
+        ports:
+        - containerPort: 8500
+          name: ui-port
+        - containerPort: 8400
+          name: alt-port
+        - containerPort: 53
+          name: udp-port
+        - containerPort: 8443
+          name: https-port
+        - containerPort: 8080
+          name: http-port
+        - containerPort: 8301
+          name: serflan
+        - containerPort: 8302
+          name: serfwan
+        - containerPort: 8600
+          name: consuldns
+        - containerPort: 8300
+          name: server
+        env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - /bin/sh
+              - -c
+              - consul leave
+        volumeMounts:
+        - name: ca-certificates
+          mountPath: /etc/ssl/certs
+        - name: consul-data
+          mountPath: /consul/data
+      volumes:
+      - name: ca-certificates
+        hostPath:
+          path: /usr/share/ca-certificates/
+      - name: consul-data
+        hostPath:
+          path: /mnt/consul
+YAML
+```
+
 ## 部署traefik
 
 执行下面代码，即可以部署`traefix`
