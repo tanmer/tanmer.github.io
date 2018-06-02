@@ -109,5 +109,50 @@ Consul和Traefik安装参考：
 
 {% page-ref page="traefik-pei-zhi.md" %}
 
+### 安装Keepalived for Kubernetes
 
+[https://github.com/kubernetes/contrib/tree/master/keepalived-vip](https://github.com/kubernetes/contrib/tree/master/keepalived-vip)
+
+教程中，以下几个地方指定注意：
+
+#### ConfigMap:
+
+```text
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vip-configmap
+  namespace: kube-system
+data:
+  10.10.140.202: ''
+
+```
+
+默认的data配置是''10.4.0.50: default/echoheaders"，10.4.0.50是VIP，default是k8s的命名空间，echoheaders是k8s中default空间的服务，这个配置的意思是路由10.4.0.50到default空间的echoheaders服务。
+
+但是，我们用到Keepalived的目的并不是他的路由功能，而是让VIP自动在Traefik所在的几台服务器上漂移，实现Traefik高可用，服务路由的事交给Traefik就好。
+
+因此，我们把data的配置改成`10.10.140.202: ''`
+
+#### DaemonSet：
+
+```text
+    spec:
+      hostNetwork: true
+      serviceAccount: kube-keepalived-vip
+```
+
+因为我们启用了RBAC，所以要加上serviceAccount，怎么创建和配置，看[https://github.com/kubernetes/contrib/tree/master/keepalived-vip\#optional-install-the-rbac-policies](https://github.com/kubernetes/contrib/tree/master/keepalived-vip#optional-install-the-rbac-policies)
+
+```text
+          args:
+          - --services-configmap=kube-system/vip-configmap
+          # unicast uses the ip of the nodes instead of multicast
+          # this is useful if running in cloud providers (like AWS)
+          - --use-unicast=true
+          # vrrp version can be set to 2.  Default 3.
+          #- --vrrp-version=2
+```
+
+这里修改参数`--services-configmap=kube-system/vip-configmap`，因为我们把configmap放到了`kube-system`空间，`--use-unicast=true`是为了解决云服务商屏蔽了多播\(multicast\)数据。
 
