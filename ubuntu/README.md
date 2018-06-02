@@ -129,5 +129,11 @@ Name:	www.tanmer.com
 Address: 120.132.67.49
 ```
 
+### mail
+
+```bash
+apt install mailutils -y
+```
+
 
 
