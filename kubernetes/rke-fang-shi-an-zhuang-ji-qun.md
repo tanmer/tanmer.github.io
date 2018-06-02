@@ -156,3 +156,92 @@ data:
 
 这里修改参数`--services-configmap=kube-system/vip-configmap`，因为我们把configmap放到了`kube-system`空间，`--use-unicast=true`是为了解决云服务商屏蔽了多播\(multicast\)数据。
 
+当运行3个Keepalived节点时，第3个节点出现错误提示，原因是`vrrp version 3`会报错，`vrrp version 2`没有问题。但是当前的docker image是`k8s.gcr.io/kube-keepalived-vip:0.11`，不是最新的版本，文档里说了支持参数`--vrrp-version`，可镜像是老的不支持。自己编译镜像比较麻烦，主要是翻墙问题和Go语言环境配置。这里有个简单的方法就是添加一个entrypoint.sh文件，启动时执行这个文件，把version替换成2
+
+```text
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vip-entrypoint
+  namespace: kube-system
+  labels:
+    app: keepalived
+data:
+  entrypoint.sh: |
+    sed -i 's/vrrp_version 3/vrrp_version 2/' /keepalived.tmpl && \
+    /kube-keepalived-vip \
+    --services-configmap=kube-system/vip-configmap \
+    --use-unicast=true
+
+```
+
+```text
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: kube-keepalived-vip
+  namespace: kube-system
+  labels:
+    app: keepalived
+spec:
+  template:
+    metadata:
+      labels:
+        name: kube-keepalived-vip
+        app: keepalived
+    spec:
+      hostNetwork: true
+      serviceAccount: kube-keepalived-vip
+      containers:
+        - image: tanmerk8s/kube-keepalived-vip:0.11
+          name: kube-keepalived-vip
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - mountPath: /lib/modules
+              name: modules
+              readOnly: true
+            - mountPath: /dev
+              name: dev
+            - mountPath: /mybin
+              name: entrypoint
+          # use downward API
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          command:
+          - bash
+          - /mybin/entrypoint.sh
+          # to use unicast
+          # args:
+          # - --services-configmap=kube-system/vip-configmap
+          # # unicast uses the ip of the nodes instead of multicast
+          # # this is useful if running in cloud providers (like AWS)
+          # - --use-unicast=true
+          # # vrrp version can be set to 2.  Default 3.
+          # - --vrrp-version=2
+      volumes:
+        - name: modules
+          hostPath:
+            path: /lib/modules
+        - name: dev
+          hostPath:
+            path: /dev
+        - name: entrypoint
+          configMap:
+            name: vip-entrypoint
+            items:
+              - key: entrypoint.sh
+                path: entrypoint.sh
+      nodeSelector:
+        edgenode: "true"
+
+```
+
