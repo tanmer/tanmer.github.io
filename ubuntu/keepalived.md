@@ -51,5 +51,31 @@ systemctl restart keepalived
 注意：每台需要IP漂移到的目标主机，都要执行以上安装和配置步骤。
 {% endhint %}
 
+## 排错
+
+在云主机上测试，很可能Keepalived不会自动漂移VIP，查看日志发现每天主机都变成了Master
+
+```text
+RRP_Instance(vips) Transition to MASTER STATE
+VRRP_Instance(vips) Entering MASTER STATE
+```
+
+这很可能是因为网络交换机过滤了`multicast`数据，参考 [https://serverfault.com/questions/512153/both-servers-running-keepalived-become-master-and-have-a-same-virtual-ip](https://serverfault.com/questions/512153/both-servers-running-keepalived-become-master-and-have-a-same-virtual-ip)
+
+如果无法关闭多播的过滤，那么可以用`unicast_peer`指定广播到Keepalived主机的IP地址列表
+
+```text
+vrrp_instance VI_1 {
+  state MASTER
+  interface eth0
+  #unicast peer 格式必须完全匹配！否则会起不来，必须写成三行。
+  unicast_peer {
+    192.168.0.10
+    192.168.0.11
+    192.168.0.12
+  }
+  ...
+```
+
 
 
