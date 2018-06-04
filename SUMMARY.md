@@ -15,14 +15,15 @@
   * [用Sass颜色函数控制颜色](qian-duan/yong-sass-yan-se-han-shu-kong-zhi-yan-se.md)
 * Ruby
   * Ruby on Rails
-    * [数据库类](ruby/ruby-on-rails/shu-ju-ku-lei.md)
-    * [日志类](ruby/ruby-on-rails/ri-zhi-lei.md)
-    * [价格字段的单位转换](ruby/ruby-on-rails/jia-ge-zi-duan-de-dan-wei-zhuan-huan.md)
-    * [部署](ruby/ruby-on-rails/bu-shu.md)
-    * [根据设备类型自动渲染页面](ruby/ruby-on-rails/gen-ju-she-bei-lei-xing-zi-dong-ran.md)
-  * [Gems](ruby/gems.md)
-  * [Automating your API with JSON Schema](ruby/automating-your-api-with-json-schema.md)
-  * [Deep freeze](ruby/deep-freeze.md)
+    * [数据库类](gem/ruby-on-rails/shu-ju-ku-lei.md)
+    * [日志类](gem/ruby-on-rails/ri-zhi-lei.md)
+    * [价格字段的单位转换](gem/ruby-on-rails/jia-ge-zi-duan-de-dan-wei-zhuan-huan.md)
+    * [部署](gem/ruby-on-rails/bu-shu.md)
+    * [根据设备类型自动渲染页面](gem/ruby-on-rails/gen-ju-she-bei-lei-xing-zi-dong-ran.md)
+  * [Gems](gem/gems.md)
+  * [Automating your API with JSON Schema](gem/automating-your-api-with-json-schema.md)
+  * [Deep freeze](gem/deep-freeze.md)
+  * [搭建私有Gem仓库](gem/da-jian-si-you-gem-cang-ku.md)
 * 数据库
   * [PostgreSQL](shu-ju-ku/postgresql/README.md)
     * [Create , Select , Delete](shu-ju-ku/postgresql/select.md)
