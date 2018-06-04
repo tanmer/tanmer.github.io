@@ -582,7 +582,7 @@ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | gre
 
 ![](../.gitbook/assets/image%20%283%29.png)
 
-![](../.gitbook/assets/image%20%2829%29.png)
+![](../.gitbook/assets/image%20%2832%29.png)
 
 ### 安装Heapster
 
@@ -631,7 +631,7 @@ http://localhost:8001/api/v1/namespaces/kube-system/services/monitoring-grafana/
 
 现在，Dashboard就能看到服务器的资源使用情况了
 
-![](../.gitbook/assets/image%20%2814%29.png)
+![](../.gitbook/assets/image%20%2815%29.png)
 
 ## 安装Weave Scope
 
@@ -671,7 +671,7 @@ kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope
 
 本地浏览器访问 [http://localhost:4040](http://localhost:4040)
 
-![](../.gitbook/assets/image%20%2813%29.png)
+![](../.gitbook/assets/image%20%2814%29.png)
 
 ## 安装Ingress
 
@@ -820,7 +820,7 @@ EOS
 
 本地电脑改一下/etc/hosts文件，指向node2就能访问traefik web UI了
 
-![](../.gitbook/assets/image%20%2817%29.png)
+![](../.gitbook/assets/image%20%2818%29.png)
 
 ## 翻墙下载镜像汇总
 
