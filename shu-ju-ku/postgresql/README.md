@@ -19,6 +19,18 @@ alter database project owner to xiaohui;
 grant all privileges on database project to xiaohui;
 ```
 
+### 更改数据表的拥有者
+
+```sql
+SELECT 'ALTER TABLE '|| schemaname || '.' || tablename ||' OWNER TO new-owner;'
+FROM pg_tables WHERE NOT schemaname IN ('pg_catalog', 'information_schema')
+ORDER BY schemaname, tablename;
+
+SELECT 'ALTER SEQUENCE '|| sequence_schema || '.' || sequence_name ||' OWNER TO new-owner;'
+FROM information_schema.sequences WHERE NOT sequence_schema IN ('pg_catalog', 'information_schema')
+ORDER BY sequence_schema, sequence_name;
+```
+
 ### 清空数据库
 
 执行下面查询，生成对所有表`drop`的SQL，然后复制、粘贴、执行。

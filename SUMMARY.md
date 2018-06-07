@@ -1,20 +1,20 @@
 # Table of contents
 
 * [探码科技-发开日志](README.md)
-* 前端
-  * Bootstrap 模板
+* [前端](qian-duan/README.md)
+  * [Bootstrap 模板](qian-duan/bootstrap-mo-ban/README.md)
     * [图表类](qian-duan/bootstrap-mo-ban/tu-biao-lei.md)
     * [Profile 类页面](qian-duan/bootstrap-mo-ban/profile-lei-ye-mian.md)
   * [JS Chart图表](qian-duan/js-chart-tu-biao.md)
   * [图片库](qian-duan/tu-pian-ku.md)
   * [Icon图标库](qian-duan/icon-tu-biao-ku.md)
-  * Css3
+  * [Css3](qian-duan/css3/README.md)
     * [tranform-origin + transform](qian-duan/css3/tranform-origin-+-transform-+-transition.md)
     * [flex](qian-duan/css3/flex/README.md)
       * [布局左边自适应，右边固定宽度](qian-duan/css3/flex/bu-ju-zuo-bian-zi-shi-ying-you-bian-gu-ding-kuan-du.md)
   * [用Sass颜色函数控制颜色](qian-duan/yong-sass-yan-se-han-shu-kong-zhi-yan-se.md)
-* Ruby
-  * Ruby on Rails
+* [Ruby](gem/README.md)
+  * [Ruby on Rails](gem/ruby-on-rails/README.md)
     * [数据库类](gem/ruby-on-rails/shu-ju-ku-lei.md)
     * [日志类](gem/ruby-on-rails/ri-zhi-lei.md)
     * [价格字段的单位转换](gem/ruby-on-rails/jia-ge-zi-duan-de-dan-wei-zhuan-huan.md)
@@ -24,7 +24,7 @@
   * [Automating your API with JSON Schema](gem/automating-your-api-with-json-schema.md)
   * [Deep freeze](gem/deep-freeze.md)
   * [搭建私有Gem仓库](gem/da-jian-si-you-gem-cang-ku.md)
-* 数据库
+* [数据库](shu-ju-ku/README.md)
   * [PostgreSQL](shu-ju-ku/postgresql/README.md)
     * [Create , Select , Delete](shu-ju-ku/postgresql/select.md)
     * [select  jsonb](shu-ju-ku/postgresql/select-jsonb.md)
@@ -45,7 +45,7 @@
   * [工具](kubernetes/gong-ju.md)
   * [安装Helm](kubernetes/an-zhuang-helm.md)
   * [亲和度配置](kubernetes/qin-he-du-pei-zhi.md)
-* 文件系统
+* [文件系统](wen-jian-xi-tong/README.md)
   * [GlusterFS](wen-jian-xi-tong/glusterfs.md)
 * [日志管理](ri-zhi-guan-li/README.md)
   * [Fluentd](ri-zhi-guan-li/fluentd.md)
@@ -63,6 +63,6 @@
   * [Keepalived](ubuntu/keepalived.md)
   * [OpenSSL 使用技巧](ubuntu/openssl-shi-yong-ji-qiao.md)
 * [Git](git.md)
-* Nginx
+* [Nginx](nginx/README.md)
   * [使用stream模块实现负载均衡](nginx/shi-yong-stream-mo-kuai-shi-xian-fu-zai-jun-heng.md)
 
