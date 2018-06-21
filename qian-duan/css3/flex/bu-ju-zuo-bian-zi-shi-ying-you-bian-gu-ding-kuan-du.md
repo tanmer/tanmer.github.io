@@ -50,7 +50,7 @@
 
 效果图如下:
 
-![](../../../.gitbook/assets/image%20%2830%29.png)
+![](../../../.gitbook/assets/image%20%2831%29.png)
 
 ## 项目中踩坑集锦
 

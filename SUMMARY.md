@@ -24,6 +24,7 @@
   * [Automating your API with JSON Schema](gem/automating-your-api-with-json-schema.md)
   * [Deep freeze](gem/deep-freeze.md)
   * [搭建私有Gem仓库](gem/da-jian-si-you-gem-cang-ku.md)
+  * [YAML语法](gem/yaml-yu-fa.md)
 * [数据库](shu-ju-ku/README.md)
   * [PostgreSQL](shu-ju-ku/postgresql/README.md)
     * [Create , Select , Delete](shu-ju-ku/postgresql/select.md)
@@ -65,4 +66,5 @@
 * [Git](git.md)
 * [Nginx](nginx/README.md)
   * [使用stream模块实现负载均衡](nginx/shi-yong-stream-mo-kuai-shi-xian-fu-zai-jun-heng.md)
+* [机器学习](ji-qi-xue-xi.md)
 
