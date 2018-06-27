@@ -598,13 +598,13 @@ k8s.gcr.io/heapster-grafana-amd64:v4.4.3
 
 ```bash
 # 安装influxdb
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/influxdb.yaml
+kubectl apply -f 
 # 安装heapster
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/heapster.yaml
 # 安装grafana
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/grafana.yaml
 # 分配权限
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/rbac/heapster-rbac.yaml
+kubectl apply -f 
 ```
 
 这里我把k8s.gcr.io/heapster-influxdb-amd64:v1.3.3镜像到了tanmerk8s/heapster-influxdb-amd64:v1.3.3，所以下面这个方法更简单
@@ -626,7 +626,7 @@ Grafana service by default requests for a LoadBalancer. If that is not available
 Grafana访问地址：
 
 ```text
-http://localhost:8001/api/v1/namespaces/kube-system/services/monitoring-grafana/proxy
+
 ```
 
 现在，Dashboard就能看到服务器的资源使用情况了

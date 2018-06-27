@@ -4,7 +4,7 @@
 
   参考文档：
 
-> {% embed data="{\"url\":\"https://mirrors.tuna.tsinghua.edu.cn/help/virtualbox/\",\"type\":\"link\",\"title\":\" Virtualbox \| 镜像站使用帮助 \| 清华大学开源软件镜像站 \| Tsinghua Open Source Mirror\",\"description\":\"清华大学开源软件镜像站，致力于为国内和校内用户提供高质量的开源软件镜像、Linux镜像源服务，帮助用户更方便地获取开源软件。本镜像站由清华大学TUNA团队负责维护。\",\"icon\":{\"type\":\"icon\",\"url\":\"https://mirrors.tuna.tsinghua.edu.cn/static/img/favicon.png\",\"aspectRatio\":0}}" %}
+>
 
 
 
@@ -24,7 +24,7 @@ sudo apt-get install virtualbox virtualbox-ext-pack -y
 
 参考文档：
 
-> {% embed data="{\"url\":\"https://www.perkin.org.uk/posts/create-virtualbox-vm-from-the-command-line.html\",\"type\":\"link\",\"title\":\"Create VirtualBox VM from the command line\",\"icon\":{\"type\":\"icon\",\"url\":\"https://www.perkin.org.uk/favicon.ico\",\"aspectRatio\":0},\"thumbnail\":{\"type\":\"thumbnail\",\"url\":\"https://www.perkin.org.uk/files/images/avatar.png\",\"width\":900,\"height\":900,\"aspectRatio\":1}}" %}
+>
 
 ### 下载Ubuntu安装盘ISO镜像
 

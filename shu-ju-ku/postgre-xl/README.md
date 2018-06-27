@@ -2,7 +2,7 @@
 description: '支持Sharding, Replication的大数据用户数据库'
 ---
 
-# Postgre XL
+# PostgreSQL XL
 
 官网：[https://www.postgres-xl.org/](https://www.postgres-xl.org/)
 
@@ -29,7 +29,7 @@ Postgres XL可实现数据分表存储在多个节点中，或在多节点中同
 
 
 
-![](../.gitbook/assets/image%20%2829%29.png)
+![](../../.gitbook/assets/image%20%2829%29.png)
 
 目前安装方式只支持二进制安装，rpm或deb等格式以后会支持的
 

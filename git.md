@@ -5,7 +5,7 @@
 ### 安装Git flow
 
 ```bash
-curl -L https://raw.githubusercontent.com/nvie/gitflow/develop/contrib/gitflow-installer.sh -o /tmp/gitflow-installer.sh
+curl -L  -o /tmp/gitflow-installer.sh
 sudo bash /tmp/gitflow-installer.sh
 ```
 
