@@ -156,5 +156,315 @@ Filesystem        Size  Used Avail Use% Mounted on
 
 K8s官方文档[https://github.com/kubernetes/examples/tree/master/staging/volumes/glusterfs](https://github.com/kubernetes/examples/tree/master/staging/volumes/glusterfs)
 
+### 添加entrypoint
+
+在gluster服务器上查看服务端口
+
+```text
+root@10-103-1-11:~# netstat -nptl
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      978/sshd
+tcp        0      0 0.0.0.0:49157           0.0.0.0:*               LISTEN      1324/glusterfsd
+tcp        0      0 0.0.0.0:24007           0.0.0.0:*               LISTEN      1144/glusterd
+tcp6       0      0 :::22                   :::*                    LISTEN      978/sshd
+```
+
+我们进程`glusterd`对应的端口`24007`就是服务端口
+
+开始创建entryppint
+
+{% code-tabs %}
+{% code-tabs-item title="gluster-endpoints.yaml" %}
+```yaml
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  labels:
+    app: external-glusterfs
+  name: glusterfs
+  namespace: common
+subsets:
+- addresses:
+  - ip: 10.103.1.11
+  - ip: 10.103.1.119
+  ports:
+  - port: 24007
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+### 配置 service
+
+{% code-tabs %}
+{% code-tabs-item title="gluster-endpoints.yaml" %}
+```yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: external-glusterfs
+  name: glusterfs
+  namespace: common
+spec:
+  ports:
+  - port: 24007
+    protocol: TCP
+    targetPort: 24007
+
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+### 创建测试 pod
+
+`volumes[0].glusterfs.endpoints`对应的值是上面创建`service`的名字
+
+`volumes[0].glusterfs.path`是上面创建的`volume`名字
+
+```yaml
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: glusterfs-debug
+  namespace: common
+spec:
+  containers:
+  - name: glusterfs
+    image: nginx
+    volumeMounts:
+    - mountPath: "/mnt/glusterfs"
+      name: glusterfsvol
+  volumes:
+  - name: glusterfsvol
+    glusterfs:
+      endpoints: glusterfs
+      path: gv0
+      readOnly: true
+```
+
+查看pod状态，确认启动成功
+
+```text
+kubectl describe pods/glusterfs
+```
+
+### 使用Heketi自动管理Glusterfs
+
+上面的方式，适合很少PV的需求，如果有很多Pod需要很多不同的PV，指向Glusterfs不同的卷（或者说不同的目录），那么每次都要手工创建Glusterfs Volume再创建对应的PV就显得很麻烦了。因此，我们就需要一种自动的方式去生成所需资源。K8s支持自定义PVC的`StorageClass`，通过它和Heketi配合，就可以自动创建所需的存储资源，不同Deployment可以拥有独立目录。
+
+参考文档：
+
+{% embed data="{\"url\":\"https://github.com/gluster/gluster-kubernetes/tree/master/docs/examples/dynamic\_provisioning\_external\_gluster\",\"type\":\"link\",\"title\":\"gluster/gluster-kubernetes\",\"description\":\"gluster-kubernetes - GlusterFS Native Storage Service for Kubernetes\",\"icon\":{\"type\":\"icon\",\"url\":\"https://github.com/fluidicon.png\",\"aspectRatio\":0},\"thumbnail\":{\"type\":\"thumbnail\",\"url\":\"https://avatars0.githubusercontent.com/u/622644?s=400&v=4\",\"width\":400,\"height\":400,\"aspectRatio\":1}}" %}
+
+{% embed data="{\"url\":\"https://github.com/heketi/heketi\",\"type\":\"link\",\"title\":\"heketi/heketi\",\"description\":\"heketi - RESTful based volume management framework for GlusterFS\",\"icon\":{\"type\":\"icon\",\"url\":\"https://github.com/fluidicon.png\",\"aspectRatio\":0},\"thumbnail\":{\"type\":\"thumbnail\",\"url\":\"https://avatars3.githubusercontent.com/u/12890374?s=400&v=4\",\"width\":400,\"height\":400,\"aspectRatio\":1}}" %}
+
+添加heketi配置文件：
+
+{% code-tabs %}
+{% code-tabs-item title="/etc/heketi/heketi.json" %}
+```javascript
+{
+  "_port_comment": "Heketi Server Port Number",
+  "port": "8080",
+
+  "_use_auth": "Enable JWT authorization. Please enable for deployment",
+  "use_auth": false,
+
+  "_jwt": "Private keys for access",
+  "jwt": {
+    "_admin": "Admin has access to all APIs",
+    "admin": {
+      "key": "My Secret"
+    },
+    "_user": "User only has access to /volumes endpoint",
+    "user": {
+      "key": "My Secret"
+    }
+  },
+
+  "_glusterfs_comment": "GlusterFS Configuration",
+  "glusterfs": {
+
+    "_executor_comment": "Execute plugin. Possible choices: mock, ssh",
+    "executor": "ssh",
+    "sshexec": {
+      "keyfile": "/etc/heketi/heketi_key",
+      "user": "ubuntu",
+      "port": "22",
+      "fstab": "/etc/fstab",
+      "sudo": true
+    },
+
+    "_db_comment": "Database file name",
+    "db": "/var/lib/heketi/heketi.db"
+  }
+}
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+这里需要注意的`glusterfs.sshexec.sudo`为`true`，否则heketi服务会提示没有权限
+
+**启动`heketi`服务：**为了方便调试，我们在本地用docker启动服务，生产环境，我们可能会在一台独立电脑上启动服务，或者用K8s在Pod中运行这个服务。
+
+```text
+docker run --name heketi -v /Users/xiaohui/coding/heketi:/etc/heketi heketi/heketi
+```
+
+这里，我们映射了本地目录`/Users/xiaohui/coding/heketi`到容器的`/etc/heketi`
+
+把上面的`heketi.json`文件放到本地目录`/Users/xiaohui/coding/heketi，同时添加`topylogy（Glusterfs Cluster的拓扑图）文件：
+
+{% code-tabs %}
+{% code-tabs-item title="/etc/heketi/topology.json" %}
+```javascript
+{
+  "clusters": [
+    {
+      "nodes": [
+        {
+          "node": {
+            "hostnames": {
+              "manage": [
+                "10.103.1.11"
+              ],
+              "storage": [
+                "10.103.1.11"
+              ]
+            },
+            "zone": 1
+          },
+          "devices": [
+            "/dev/sdb"
+          ]
+        },
+        {
+          "node": {
+            "hostnames": {
+              "manage": [
+                "10.103.1.119"
+              ],
+              "storage": [
+                "10.103.1.119"
+              ]
+            },
+            "zone": 1
+          },
+          "devices": [
+            "/dev/sdb"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+这个文件的目的是定义Glusterfs服务器地址和磁盘。
+
+然后新开 一个终端，进入heketi容器：
+
+```text
+docker exec -it heketi bash
+```
+
+当我们手工在Ubuntu上安装Glusterfs之后，用heketi-cli加载集群配置时，可能会出现如下错误：
+
+```text
+[root@b5ff52589fc7 ~]# heketi-cli topology load --json /etc/heketi/topology.json
+Creating cluster ... ID: ea58edbcd5880a426771e73d0bd5c0df
+	Allowing file volumes on cluster.
+	Allowing block volumes on cluster.
+	Creating node 10.103.1.11 ... Unable to create node: New Node doesn't have glusterd running
+	Creating node 10.103.1.119 ... Unable to create node: New Node doesn't have glusterd running
+```
+
+查看Heketi HTTP服务器端日志，会发现如下错误：
+
+```text
+[negroni] Started GET /queue/a569809c6f54685276f2331aa4891e5f
+[negroni] Completed 500 Internal Server Error in 103.1µs
+[negroni] Started POST /nodes
+[cmdexec] INFO 2018/08/04 10:29:40 Check Glusterd service status in node 10.103.1.11
+[cmdexec] DEBUG 2018/08/04 10:29:41 /src/github.com/heketi/heketi/pkg/utils/ssh/ssh.go:174: Host: 10.103.1.11:22 Command: /bin/bash -c 'systemctl status glusterd'
+```
+
+这里可以找到原因：`systemctl status glusterd`没有找到服务，是因为Ubuntu安装的gluster服务名是`glusterfs-server`
+
+```text
+root@10-103-1-11:~# systemctl status glusterfs-server.service
+● glusterfs-server.service - LSB: GlusterFS server
+   Loaded: loaded (/etc/init.d/glusterfs-server; bad; vendor preset: enabled)
+  Drop-In: /etc/systemd/system/glusterfs-server.service.d
+           └─override.conf
+   Active: active (running) since Sat 2018-08-04 18:26:14 CST; 6min ago
+     Docs: man:systemd-sysv-generator(8)
+  Process: 9703 ExecStart=/etc/init.d/glusterfs-server start (code=exited, status=0/SUCCESS)
+    Tasks: 40
+   Memory: 126.6M
+      CPU: 1.775s
+```
+
+目前，Heketi写死了服务名称，无法配置 [https://github.com/heketi/heketi/blob/6d80b73a799084cd28776e25857225c645756aaf/executors/cmdexec/peer.go\#L72](https://github.com/heketi/heketi/blob/6d80b73a799084cd28776e25857225c645756aaf/executors/cmdexec/peer.go#L72)
+
+![](../.gitbook/assets/image%20%2824%29.png)
+
+因此，我们只有创建一个systemd别名：`glusterd.service` =&gt; `glusterfs-server.service`
+
+方法如下：
+
+```bash
+root@10-103-1-11:~# systemctl edit glusterfs-server.service
+```
+
+添加内容：
+
+```text
+[Install]
+Alias=glusterd.service
+```
+
+获取服务的文件地址`/run/systemd/generator.late/glusterfs-server.service`
+
+```text
+root@10-103-1-11:~# systemctl cat glusterfs-server.service
+# /run/systemd/generator.late/glusterfs-server.service
+# Automatically generated by systemd-sysv-generator
+
+[Unit]
+Documentation=man:systemd-sysv-generator(8)
+SourcePath=/etc/init.d/glusterfs-server
+Description=LSB: GlusterFS server
+Before=multi-user.target
+Before=multi-user.target
+Before=multi-user.target
+```
+
+创建软连接：
+
+```text
+ln -sf /run/systemd/generator.late/glusterfs-server.service /etc/systemd/system/glusterd.service
+```
+
+启动服务：
+
+```text
+systemctl daemon-reload
+systemctl enable glusterd
+systemctl start glusterd
+```
+
+现在我们再次加载Glusterfs Cluster Topology 文件
+
+```text
+heketi-cli topology load --json /etc/heketi/topology.json
+```
+
 
 

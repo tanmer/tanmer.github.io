@@ -13,6 +13,7 @@
     * [flex](qian-duan/css3/flex/README.md)
       * [布局左边自适应，右边固定宽度](qian-duan/css3/flex/bu-ju-zuo-bian-zi-shi-ying-you-bian-gu-ding-kuan-du.md)
   * [用Sass颜色函数控制颜色](qian-duan/yong-sass-yan-se-han-shu-kong-zhi-yan-se.md)
+* [Javascript](javascript.md)
 * [Ruby](gem/README.md)
   * [Ruby on Rails](gem/ruby-on-rails/README.md)
     * [数据库类](gem/ruby-on-rails/shu-ju-ku-lei.md)

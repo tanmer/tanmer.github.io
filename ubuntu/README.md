@@ -6,6 +6,23 @@
 sudo sed -i 's!http://us.archive.ubuntu.com!https://mirrors.tuna.tsinghua.edu.cn!' /etc/apt/sources.list
 ```
 
+## 配置
+
+### 允许root远程登录
+
+Ubuntu默认是不允许root远程登录的，我们可以修改`PermitRootLogin`的值，改变root登录方式。
+
+```text
+vi /etc/ssh/sshd_config
+```
+
+```text
+PermitRootLogin yes # 允许root用密码和Public Key方式登录
+PermitRootLogin prohibit-password # 
+PermitRootLogin without-password # 只允许root用public key认证方式登录
+PermitRootLogin no # 不允许root登录
+```
+
 ## 翻墙技巧
 
 ### 傻瓜式
@@ -135,5 +152,19 @@ Address: 120.132.67.49
 apt install mailutils -y
 ```
 
+### sudo
 
+配置sudo用户不需要密码
+
+```bash
+sudo sudovi
+```
+
+在打开的文件结尾添加如下内容（注意，一定是文件结尾，否则可能不成功）：
+
+```text
+ubuntu ALL=(ALL) NOPASSWD:ALL
+```
+
+重新登录，测试一下sudo应该不会出现密码提示。
 

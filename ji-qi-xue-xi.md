@@ -12,5 +12,5 @@ Ruby SDK: [https://github.com/apache/predictionio-sdk-ruby](https://github.com/a
 
 目前官方提供7套算法模板 [https://github.com/apache?utf8=✓&q=predictionio-template&type=&language=](https://github.com/apache?utf8=✓&q=predictionio-template&type=&language=)
 
-![](.gitbook/assets/image%20%2828%29.png)
+![](.gitbook/assets/image%20%2829%29.png)
 

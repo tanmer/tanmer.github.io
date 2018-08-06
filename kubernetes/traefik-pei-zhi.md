@@ -328,7 +328,7 @@ traefik-ingress-lb-xqncg   1/1       Running   0          2m
 kubectl -n kube-system port-forward traefik-ingress-lb-27bql 8580
 ```
 
-![](../.gitbook/assets/image%20%2834%29.png)
+![](../.gitbook/assets/image%20%2835%29.png)
 
 ![](../.gitbook/assets/image%20%2819%29.png)
 
