@@ -21,6 +21,7 @@
     * [价格字段的单位转换](gem/ruby-on-rails/jia-ge-zi-duan-de-dan-wei-zhuan-huan.md)
     * [部署](gem/ruby-on-rails/bu-shu.md)
     * [根据设备类型自动渲染页面](gem/ruby-on-rails/gen-ju-she-bei-lei-xing-zi-dong-ran.md)
+    * [路由](gem/ruby-on-rails/lu-you.md)
   * [Gems](gem/gems.md)
   * [Automating your API with JSON Schema](gem/automating-your-api-with-json-schema.md)
   * [Deep freeze](gem/deep-freeze.md)
