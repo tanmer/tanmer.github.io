@@ -18,7 +18,7 @@ GlusterFS+Kubernetes官方文档：[https://github.com/gluster/gluster-kubernete
 
 ### 安装前的准备
 
-最少两台服务器，用replication模式，一主一备，防止数据库丢失，高可用。每台服务器2CPU，2G内存，100G SSD硬盘，网络带宽1G以上，安装Ubuntu 14.04
+最少两台服务器，用replication模式，一主一备，防止数据库丢失，高可用。每台服务器2CPU，2G内存，100G SSD硬盘，网络带宽1G以上，安装Ubuntu 16.04
 
 ### 安装
 
@@ -103,6 +103,23 @@ Options Reconfigured:
 transport.address-family: inet
 performance.readdir-ahead: on
 nfs.disable: on
+```
+
+### 停止卷
+
+```bash
+root@10-103-1-11:~# gluster
+gluster> volume stop kube-vol
+Stopping volume will make its data inaccessible. Do you want to continue? (y/n) y
+volume stop: kube-vol: success
+```
+
+### 删除卷
+
+```text
+gluster> volume delete kube-vol
+Deleting volume will erase all information about the volume. Do you want to continue? (y/n) y
+volume delete: kube-vol: success
 ```
 
 ## 客户端挂载卷
@@ -252,9 +269,9 @@ spec:
 kubectl describe pods/glusterfs
 ```
 
-### 使用Heketi自动管理Glusterfs
+### 安装配置Heketi
 
-上面的方式，适合很少PV的需求，如果有很多Pod需要很多不同的PV，指向Glusterfs不同的卷（或者说不同的目录），那么每次都要手工创建Glusterfs Volume再创建对应的PV就显得很麻烦了。因此，我们就需要一种自动的方式去生成所需资源。K8s支持自定义PVC的`StorageClass`，通过它和Heketi配合，就可以自动创建所需的存储资源，不同Deployment可以拥有独立目录。
+上面的方式，适合只有很少PV需求的场景，如果有很多Pod需要很多PV，指向Glusterfs不同的卷（或者说不同的目录），那么每次都要手工创建Glusterfs Volume再创建对应的PV就会很麻烦。因此，我们需要一种自动的方式去生成所需资源。K8s支持自定义PVC的`StorageClass`，通过它和`Heketi`配合，就可以自动创建所需的存储资源，不同`Deployment`可以拥有独立目录。
 
 参考文档：
 
@@ -464,6 +481,155 @@ systemctl start glusterd
 
 ```text
 heketi-cli topology load --json /etc/heketi/topology.json
+[root@c63599638219 /]# heketi-cli topology load --json /etc/heketi/topology.json
+	Found node 10.103.1.11 on cluster 2748c838c9e5433c140dd580ce8d92ba
+		Adding device /dev/vdb ... OK
+	Found node 10.103.1.119 on cluster 2748c838c9e5433c140dd580ce8d92ba
+		Adding device /dev/vdb ... OK
+```
+
+{% hint style="info" %}
+这里需要注意，磁盘/dev/sdb必须是一个空磁盘并且没有被挂载到系统，否则会添加失败。Heketi这么做的目的也是为了保护我们的磁盘数据，万一设置了错误的磁盘，不至于丢失数据。
+{% endhint %}
+
+如果磁盘的确已经被挂载或者已经被格式化，我们需要做如下操作：
+
+```text
+卸载磁盘
+umount /dev/sdb
+# 删除掉挂载信息
+vi /etc/fstab
+# 清除磁盘分区
+wipefs /dev/vdb -a
+```
+
+#### 测试heketi-cli命令
+
+获取集群
+
+```text
+[root@c63599638219 /]# heketi-cli cluster list
+Clusters:
+Id:2748c838c9e5433c140dd580ce8d92ba [file][block]
+```
+
+获取节点列表
+
+```text
+[root@c63599638219 /]# heketi-cli node list
+Id:783947cc37876e44c1fdee6f1690c1d7	Cluster:2748c838c9e5433c140dd580ce8d92ba
+Id:e935a6a52e562477da79d6667401a505	Cluster:2748c838c9e5433c140dd580ce8d92ba
+```
+
+创建Volume
+
+```text
+[root@c63599638219 /]# heketi-cli volume create --size=10 --replica=2  --name my-vol
+Name: my-vol
+Size: 10
+Volume Id: 66f29b294df96b378548f10ee898eaf5
+Cluster Id: 2748c838c9e5433c140dd580ce8d92ba
+Mount: 10.103.1.119:my-vol
+Mount Options: backup-volfile-servers=10.103.1.11
+Block: false
+Free Size: 0
+Block Volumes: []
+Durability Type: replicate
+Distributed+Replica: 2
+```
+
+{% hint style="info" %}
+创建Volume时可能会出现错误“usr sbin thin\_check no such file or directory”，需要在每台Glusterfs服务器上安装：apt install thin-provisioning-tools
+{% endhint %}
+
+获取卷列表
+
+```text
+[root@c63599638219 /]# heketi-cli volume list
+Id:66f29b294df96b378548f10ee898eaf5    Cluster:2748c838c9e5433c140dd580ce8d92ba    Name:my-vol
+```
+
+获取拓扑信息
+
+```text
+[root@c63599638219 /]# heketi-cli topology info
+
+Cluster Id: 2748c838c9e5433c140dd580ce8d92ba
+
+    File:  true
+    Block: true
+
+    Volumes:
+
+	Name: my-vol
+	Size: 10
+	Id: 66f29b294df96b378548f10ee898eaf5
+	Cluster Id: 2748c838c9e5433c140dd580ce8d92ba
+	Mount: 10.103.1.119:my-vol
+	Mount Options: backup-volfile-servers=10.103.1.11
+	Durability Type: replicate
+	Replica: 2
+	Snapshot: Disabled
+
+		Bricks:
+			Id: 44b8c2bdbd04fbeadd197e10a25701b0
+			Path: /var/lib/heketi/mounts/vg_26cea42d1a71151288db4cab8477bc86/brick_44b8c2bdbd04fbeadd197e10a25701b0/brick
+			Size (GiB): 10
+			Node: e935a6a52e562477da79d6667401a505
+			Device: 26cea42d1a71151288db4cab8477bc86
+
+			Id: de363568400f13f28e0bb83845c549bd
+			Path: /var/lib/heketi/mounts/vg_75a66dbe5b2c64db3678f052837fc9c2/brick_de363568400f13f28e0bb83845c549bd/brick
+			Size (GiB): 10
+			Node: 783947cc37876e44c1fdee6f1690c1d7
+			Device: 75a66dbe5b2c64db3678f052837fc9c2
+
+
+    Nodes:
+
+	Node Id: 783947cc37876e44c1fdee6f1690c1d7
+	State: online
+	Cluster Id: 2748c838c9e5433c140dd580ce8d92ba
+	Zone: 1
+	Management Hostnames: 10.103.1.119
+	Storage Hostnames: 10.103.1.119
+	Devices:
+		Id:75a66dbe5b2c64db3678f052837fc9c2   Name:/dev/vdb            State:online    Size (GiB):99      Used (GiB):10      Free (GiB):89
+			Bricks:
+				Id:de363568400f13f28e0bb83845c549bd   Size (GiB):10      Path: /var/lib/heketi/mounts/vg_75a66dbe5b2c64db3678f052837fc9c2/brick_de363568400f13f28e0bb83845c549bd/brick
+
+	Node Id: e935a6a52e562477da79d6667401a505
+	State: online
+	Cluster Id: 2748c838c9e5433c140dd580ce8d92ba
+	Zone: 1
+	Management Hostnames: 10.103.1.11
+	Storage Hostnames: 10.103.1.11
+	Devices:
+		Id:26cea42d1a71151288db4cab8477bc86   Name:/dev/vdb            State:online    Size (GiB):99      Used (GiB):10      Free (GiB):89
+			Bricks:
+				Id:44b8c2bdbd04fbeadd197e10a25701b0   Size (GiB):10      Path: /var/lib/heketi/mounts/vg_26cea42d1a71151288db4cab8477bc86/brick_44b8c2bdbd04fbeadd197e10a25701b0/brick
+[root@c63599638219 /]#
+```
+
+获取磁盘信息
+
+```text
+[root@c63599638219 /]# heketi-cli device info 26cea42d1a71151288db4cab8477bc86
+Device Id: 26cea42d1a71151288db4cab8477bc86
+Name: /dev/vdb
+State: online
+Size (GiB): 99
+Used (GiB): 10
+Free (GiB): 89
+Bricks:
+Id:44b8c2bdbd04fbeadd197e10a25701b0   Size (GiB):10      Path: /var/lib/heketi/mounts/vg_26cea42d1a71151288db4cab8477bc86/brick_44b8c2bdbd04fbeadd197e10a25701b0/brick
+```
+
+删除卷
+
+```text
+[root@c63599638219 /]# heketi-cli volume delete 66f29b294df96b378548f10ee898eaf5
+Volume 66f29b294df96b378548f10ee898eaf5 deleted
 ```
 
 
