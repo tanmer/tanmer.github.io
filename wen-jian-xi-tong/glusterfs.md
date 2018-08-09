@@ -6,7 +6,7 @@ k8s集群中，怎么也会遇到数据持久化的问题，需要用到PV和PVC
 
 [https://kubernetes.io/docs/concepts/storage/storage-classes/](https://kubernetes.io/docs/concepts/storage/storage-classes/)
 
-![](../.gitbook/assets/image%20%2822%29.png)
+![](../.gitbook/assets/image%20%2824%29.png)
 
 ## 开始安装 
 
@@ -430,7 +430,7 @@ root@10-103-1-11:~# systemctl status glusterfs-server.service
 
 目前，Heketi写死了服务名称，无法配置 [https://github.com/heketi/heketi/blob/6d80b73a799084cd28776e25857225c645756aaf/executors/cmdexec/peer.go\#L72](https://github.com/heketi/heketi/blob/6d80b73a799084cd28776e25857225c645756aaf/executors/cmdexec/peer.go#L72)
 
-![](../.gitbook/assets/image%20%2824%29.png)
+![](../.gitbook/assets/image%20%2826%29.png)
 
 因此，我们只有创建一个systemd别名：`glusterd.service` =&gt; `glusterfs-server.service`
 

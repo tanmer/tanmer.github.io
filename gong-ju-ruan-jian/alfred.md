@@ -6,7 +6,7 @@ description: 取代Mac自带的Spotlight search
 
 ## 自动通过翻墙浏览器上网
 
-![](../.gitbook/assets/image%20%2813%29.png)
+![](../.gitbook/assets/image%20%2815%29.png)
 
 ### 原理
 
@@ -34,7 +34,7 @@ description: 取代Mac自带的Spotlight search
 
 双击cr
 
-![](../.gitbook/assets/image%20%2835%29.png)
+![](../.gitbook/assets/image%20%2841%29.png)
 
 点下面圆圈处，会打开Finder
 
