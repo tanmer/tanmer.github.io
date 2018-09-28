@@ -9,6 +9,7 @@
   * [图片库](qian-duan/tu-pian-ku.md)
   * [Icon图标库](qian-duan/icon-tu-biao-ku.md)
   * [Css3](qian-duan/css3/README.md)
+    * [字体+背景混合搭配](qian-duan/css3/zi-ti-+-bei-jing-hun-he-da-pei.md)
     * [tranform-origin + transform](qian-duan/css3/tranform-origin-+-transform-+-transition.md)
     * [flex](qian-duan/css3/flex/README.md)
       * [布局左边自适应，右边固定宽度](qian-duan/css3/flex/bu-ju-zuo-bian-zi-shi-ying-you-bian-gu-ding-kuan-du.md)

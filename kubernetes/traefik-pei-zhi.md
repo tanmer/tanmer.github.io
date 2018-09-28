@@ -328,9 +328,9 @@ traefik-ingress-lb-xqncg   1/1       Running   0          2m
 kubectl -n kube-system port-forward traefik-ingress-lb-27bql 8580
 ```
 
-![](../.gitbook/assets/image%20%2842%29.png)
+![](../.gitbook/assets/image%20%2843%29.png)
 
-![](../.gitbook/assets/image%20%2821%29.png)
+![](../.gitbook/assets/image%20%2822%29.png)
 
 ## 注册Let'sencrypt账号
 
