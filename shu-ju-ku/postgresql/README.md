@@ -1,5 +1,59 @@
 # PostgreSQL
 
+## 安装
+
+### Docker安装
+
+1. 我们的项目都会涉及到中文字符，会对中文字符按拼音排序，`Ubuntu`默认安装的`PostgreSQL`是`en_US.UTF-8`字符集排序，要支持拼音培训，需要改为`zh_CN.UTF-8`。
+2. Mac下用`brew`安装的PostgreSQL字符集排序是`zn_CN.UTF-8`，但是很奇怪的是他并不能实现拼音排序，经研究之后确实找不到解决办法。 因为以上两点，所以我用这个镜像方便我们开发人员快速使用数据库
+
+#### 如何启动
+
+```bash
+mkdir -p ~/postgresql/data
+docker run -v $(realpath ~/postgresql/data):/var/lib/postgresql/data -p 5432:5432 --name postgresql-10 -d tanmer/postgresql:10
+```
+
+#### 进入psql CLI
+
+```text
+docker exec -it postgresql-10 psql -U postgres
+```
+
+#### 测试中文排序是否正确
+
+```text
+postgres=# select * from (values ('刘少奇'),('刘德华')) as a(c1) order by c1;
+  c1
+--------
+刘德华
+刘少奇
+(2 rows)
+
+postgres=#
+```
+
+#### 镜像 tanmer/postgresql:10 的 Dockerfile内容
+
+```text
+FROM postgres:10
+MAINTAINER Xiaohui <xiaohui@tanmer.com>
+
+RUN sed -i 's!deb.debian.org!mirrors.163.com!' /etc/apt/sources.list \
+    && apt update \
+    && apt install --reinstall locales \
+    && echo zh_CN UTF-8 > /etc/locale.gen \
+    && echo zh_CN.UTF-8 UTF-8 >> /etc/locale.gen \
+    && echo en_US UTF-8 >> /etc/locale.gen \
+    && echo en_US.UTF-8 UTF-8 >> /etc/locale.gen \
+    && locale-gen
+
+ENV LC_COLLATE zh_CN.UTF-8
+
+```
+
+## 使用
+
 ### 创建用户
 
 ```sql
