@@ -12,9 +12,9 @@ HTML代码块：
 
 ```text
 <!-- html start -->
-  <div class="tanmer__text__background animated fadeIn delay-2s" style="background-image: url('./images/bg.jpg')">
+<div class="tanmer__text__background animated fadeIn delay-2s" style="background-image: url('./images/bg.jpg')">
     <h1 class="tanmer__text size__10">Hello World !</h1>
-  </div>
+</div>
 <!-- end -->
 ```
 
@@ -33,6 +33,7 @@ html, body {
 /* css start */
   .tanmer__text__background {
     width: 100%;
+    height: 100%;
     background-color: white;
     background-size: cover;
     background-position: center center;
@@ -42,12 +43,10 @@ html, body {
     font-weight: bold;
     background-color: white;
     color: black;
-    height: 100vh;
-    width: 100vw;
-
-    font-size: 14vw;
+    height: 100%;
+    font-size: 5vw;
     
-    /* flex */
+    /* display flex */
     display: flex;
     display: -webkit-flex;
     justify-content: center;
@@ -65,7 +64,7 @@ CSS中用到了:
 
 * background-attachment: fixed;  // 背景图片定位
 * background-size: cover; // 覆盖在盒子宽度以内
-* font-size: 14vm; // vw: 相对窗口宽度大小，窗口宽度为 100% ，字体大小为窗口大小的14%；
+* font-size: 5vm; // vw: 相对窗口宽度大小，窗口宽度为 100% ，字体大小为窗口大小的5%；
 * display: flex; // 弹性盒子布局
 * mix-blend-mode: screen; // screen；黑色部分透明，multiply; 白色部分透明
   * 样式视屏：[https://www.youtube.com/watch?v=vs34f9FiHps&t=3783s](https://www.youtube.com/watch?v=vs34f9FiHps&t=3783s) （此视屏中包含了其他css 秘密）
