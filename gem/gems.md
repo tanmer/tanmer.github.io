@@ -4,17 +4,25 @@ description: 常用gem列表
 
 # Gems
 
-### sanitize
+## 数据库
 
-清理HTML代码 [https://github.com/rgrove/sanitize](https://github.com/rgrove/sanitize)
+1. [scenic](https://github.com/thoughtbot/scenic) 待版本控制的数据库视图管理 
+2. [rails\_db](https://github.com/igorkasyanchuk/rails_db) 数据库在线GUI管理
+3. [paranoia](https://github.com/rubysherpas/paranoia/) 数据软删除
 
-### faraday
+## 视图
 
-HTTP客户端 [https://github.com/lostisland/faraday](https://github.com/lostisland/faraday)
+1. [codemirror-rails](https://github.com/fixlr/codemirror-rails/) 代码查看、编辑器
+2. [terminal-table](https://github.com/tj/terminal-table/) 可把数组排版为终端显示的表格输出
+3. [sanitize](https://github.com/rgrove/sanitize) 清理HTML源代码
+4. [kaminari](https://github.com/kaminari/kaminari) Model数据库记录或数组的分页插件 
 
-### Kaminari
+## HTTP API
 
-强大的分页 [https://github.com/kaminari/kaminari](https://github.com/kaminari/kaminari)
+1. [flexirest](https://github.com/flexirest/flexirest/) REST API 转为Model实例
+2.  [faraday](https://github.com/lostisland/faraday) HTTP 客户端
+
+## 待分类
 
 ### Kaminari-i18n
 

@@ -275,9 +275,9 @@ kubectl describe pods/glusterfs
 
 参考文档：
 
-{% embed data="{\"url\":\"https://github.com/gluster/gluster-kubernetes/tree/master/docs/examples/dynamic\_provisioning\_external\_gluster\",\"type\":\"link\",\"title\":\"gluster/gluster-kubernetes\",\"description\":\"gluster-kubernetes - GlusterFS Native Storage Service for Kubernetes\",\"icon\":{\"type\":\"icon\",\"url\":\"https://github.com/fluidicon.png\",\"aspectRatio\":0},\"thumbnail\":{\"type\":\"thumbnail\",\"url\":\"https://avatars0.githubusercontent.com/u/622644?s=400&v=4\",\"width\":400,\"height\":400,\"aspectRatio\":1}}" %}
+{% embed url="https://github.com/gluster/gluster-kubernetes/tree/master/docs/examples/dynamic\_provisioning\_external\_gluster" %}
 
-{% embed data="{\"url\":\"https://github.com/heketi/heketi\",\"type\":\"link\",\"title\":\"heketi/heketi\",\"description\":\"heketi - RESTful based volume management framework for GlusterFS\",\"icon\":{\"type\":\"icon\",\"url\":\"https://github.com/fluidicon.png\",\"aspectRatio\":0},\"thumbnail\":{\"type\":\"thumbnail\",\"url\":\"https://avatars3.githubusercontent.com/u/12890374?s=400&v=4\",\"width\":400,\"height\":400,\"aspectRatio\":1}}" %}
+{% embed url="https://github.com/heketi/heketi" %}
 
 添加heketi配置文件：
 
