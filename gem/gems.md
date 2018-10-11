@@ -9,6 +9,9 @@ description: 常用gem列表
 1. [scenic](https://github.com/thoughtbot/scenic) 待版本控制的数据库视图管理 
 2. [rails\_db](https://github.com/igorkasyanchuk/rails_db) 数据库在线GUI管理
 3. [paranoia](https://github.com/rubysherpas/paranoia/) 数据软删除
+4. [acts\_as\_list](https://github.com/swanandp/acts_as_list) 实现数据排序
+5. [acts-as-taggable-on](https://github.com/mbleigh/acts-as-taggable-on) 给数据打标签
+6. [closure\_tree](https://github.com/ClosureTree/closure_tree) 给数据定义树形结构
 
 ## 视图
 
@@ -24,6 +27,8 @@ description: 常用gem列表
 
 ## 待分类
 
+1. [annotate\_models](https://github.com/ctran/annotate_models) 自动为Model、Route、Fixture等生成备注信息
+
 ### Kaminari-i18n
 
 分页国际化 [https://rubygems.org/gems/kaminari-i18n](https://rubygems.org/gems/kaminari-i18n)
@@ -31,10 +36,6 @@ description: 常用gem列表
 ### Simple\_form
 
 更好用的form [https://github.com/plataformatec/simple\_form](https://github.com/plataformatec/simple_form)
-
-### ActsAsTaggableOn
-
-打标签 [https://github.com/mbleigh/acts-as-taggable-on](https://github.com/mbleigh/acts-as-taggable-on)
 
 ### Closure Tree
 
