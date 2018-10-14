@@ -2,6 +2,15 @@
 description: html + css 实现字体+背景图片混搭效果
 ---
 
+# 应用案例：
+
+http://www.sodacan.cn/
+
+http://www.0900.cc/
+
+http://highgradelab.com/stash/branding-agency/
+
+
 # 字体+背景混合搭配
 
 最终效果图：
