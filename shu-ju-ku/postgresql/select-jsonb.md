@@ -1,7 +1,3 @@
----
-description: 筛选列名类型为 jsonb 的数据信息
----
-
 # select  jsonb
 
 例:

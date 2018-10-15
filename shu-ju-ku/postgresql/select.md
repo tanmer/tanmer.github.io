@@ -1,7 +1,3 @@
----
-description: 'Learn to create , select and delete database in PostgreSQL'
----
-
 # Create , Select , Delete
 
 > 登录 PostgreSQL 控制台

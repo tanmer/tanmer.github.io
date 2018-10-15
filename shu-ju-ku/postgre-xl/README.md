@@ -1,7 +1,3 @@
----
-description: '支持Sharding, Replication的大数据用户数据库'
----
-
 # PostgreSQL XL
 
 官网：[https://www.postgres-xl.org/](https://www.postgres-xl.org/)

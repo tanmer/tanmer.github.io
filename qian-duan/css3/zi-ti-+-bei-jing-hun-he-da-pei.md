@@ -2,16 +2,17 @@
 description: html + css 实现字体+背景图片混搭效果
 ---
 
-# 应用案例：
-
-http://www.sodacan.cn/
-
-http://www.0900.cc/
-
-http://highgradelab.com/stash/branding-agency/
-
-
 # 字体+背景混合搭配
+
+## 应用案例：
+
+[http://www.sodacan.cn/](http://www.sodacan.cn/)
+
+[http://www.0900.cc/](http://www.0900.cc/)
+
+[http://highgradelab.com/stash/branding-agency/](http://highgradelab.com/stash/branding-agency/)
+
+## 字体+背景混合搭配
 
 最终效果图：
 
@@ -38,7 +39,7 @@ html, body {
   height: 1000px;
   width: 100%;
 } 
- 
+
 /* css start */
   .tanmer__text__background {
     width: 100%;
@@ -75,7 +76,7 @@ html, body {
 /* end */
 ```
 
-## 扩展
+### 扩展
 
 最终效果图：
 
@@ -100,14 +101,14 @@ CSS增加的代码块：
     position: absolute;
     width: 100%;
     height: 100%;
-  
+
     /* variable params2 初始值 */
     mix-blend-mode: var(--mix_blend_mode, color-burn);
     background-color: var(--background_color, #03c9a9);
   }
 ```
 
-### 结构
+#### 结构
 
 * &lt;div  class="tanmer\_\_text\_\_background"&gt;
   * 描述：主要用于放置背景图片，使图片固定在页面中，不跟随滚动
@@ -119,11 +120,9 @@ CSS增加的代码块：
       * 描述：处理文字展示效果
       * 变量：包含 --font-size、--background-color、--color，在 style 属性中进行赋值
 
-> ### 参考文档：
+> #### 参考文档：
 >
 > [https://www.youtube.com/watch?v=vs34f9FiHps&t=3783s](https://www.youtube.com/watch?v=vs34f9FiHps&t=3783s) （mix-blend-mode youtube视屏）
 >
 > [https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode](https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode) （mix-blend-mode MDN文档）
-
-
 
