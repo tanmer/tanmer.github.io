@@ -1,6 +1,7 @@
 # Table of contents
 
 * [探码科技-发开日志](README.md)
+* [代码规范](dai-ma-gui-fan.md)
 * [前端](qian-duan/README.md)
   * [Bootstrap 模板](qian-duan/bootstrap-mo-ban/README.md)
     * [图表类](qian-duan/bootstrap-mo-ban/tu-biao-lei.md)
@@ -26,7 +27,7 @@
     * [路由](gem/ruby-on-rails/lu-you.md)
   * [Gems](gem/gems.md)
   * [Automating your API with JSON Schema](gem/automating-your-api-with-json-schema.md)
-  * [Deep freeze](gem/deep-freeze.md)
+  * [深度冻结变量 Deep Freeze](gem/deep-freeze.md)
   * [搭建私有Gem仓库](gem/da-jian-si-you-gem-cang-ku.md)
   * [YAML语法](gem/yaml-yu-fa.md)
 * [数据库](shu-ju-ku/README.md)

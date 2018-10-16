@@ -1,4 +1,4 @@
-# Deep freeze
+# 深度冻结变量 Deep Freeze
 
 Ruby自带的`freeze`无法深度冻结，如：
 
