@@ -8,6 +8,7 @@
 4. [acts\_as\_list](https://github.com/swanandp/acts_as_list) 实现数据排序
 5. [acts-as-taggable-on](https://github.com/mbleigh/acts-as-taggable-on) 给数据打标签
 6. [closure\_tree](https://github.com/ClosureTree/closure_tree) 给数据定义树形结构
+7. [active\_attr](https://github.com/cgriego/active_attr) 像ActiveRecord一样使用Class，但是不用连接数据库
 
 ## 视图
 
