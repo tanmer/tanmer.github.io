@@ -93,5 +93,39 @@ ORDER BY sequence_schema, sequence_name;
 select 'drop table "' || tablename || '" cascade;' as drop_table from pg_tables where schemaname = 'public';
 ```
 
- 
+##  查询
+
+### 获取某时区的时间
+
+```sql
+// 先获取所有的时区定义
+select * from pg_timezone_names order by utc_offset
+```
+
+```text
+               name               | abbrev | utc_offset | is_dst
+----------------------------------+--------+------------+--------
+ Africa/Abidjan                   | GMT    | 00:00:00   | f
+ Africa/Accra                     | GMT    | 00:00:00   | f
+ Africa/Addis_Ababa               | EAT    | 03:00:00   | f
+ Africa/Algiers                   | CET    | 01:00:00   | f
+ Africa/Asmara                    | EAT    | 03:00:00   | f
+ Africa/Asmera                    | EAT    | 03:00:00   | f
+ Africa/Bamako                    | GMT    | 00:00:00   | f
+```
+
+```sql
+// 把字段created_at的UTC时间转换为用户设定的本地时间
+select created_at, timezone, created_at at time zone 'UTC' at time zone timezone as localtime from users;
+```
+
+```text
+         created_at         |   timezone    |         localtime
+----------------------------+---------------+----------------------------
+ 2018-10-10 03:36:33.686459 | Asia/Shanghai | 2018-10-10 11:36:33.686459
+ 2018-10-10 04:11:23.707863 | PST           | 2018-10-09 20:11:23.707863
+(2 rows)
+```
+
+
 
