@@ -41,3 +41,7 @@ root@10-10-21-131:~# systemctl status certbot.timer
 
 在Ubuntu上安装的certbot服务，会自动更新证书，一次配置，以后再也不用担心证书过期问题了。操作非常简单，5分钟之内即可完成上面操作。
 
+参考：
+
+[https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04)
+
