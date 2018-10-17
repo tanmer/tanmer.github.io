@@ -79,6 +79,7 @@
   * [OpenSSL 使用技巧](ubuntu/openssl-shi-yong-ji-qiao.md)
 * [Git](git.md)
 * [Nginx](nginx/README.md)
+  * [自动更新SSL证书](nginx/zi-dong-geng-xin-ssl-zheng-shu.md)
   * [使用stream模块实现负载均衡](nginx/shi-yong-stream-mo-kuai-shi-xian-fu-zai-jun-heng.md)
 * [机器学习](ji-qi-xue-xi.md)
 
