@@ -34,6 +34,7 @@
   * [PostgreSQL](shu-ju-ku/postgresql/README.md)
     * [基础知识](shu-ju-ku/postgresql/ji-chu-zhi-shi/README.md)
       * [如何在Postgresql中插入数据](shu-ju-ku/postgresql/ji-chu-zhi-shi/ru-he-zai-postgresql-zhong-cha-ru-shu-ju.md)
+      * [如何在PostgreSQL中更新数据](shu-ju-ku/postgresql/ji-chu-zhi-shi/ru-he-zai-postgresql-zhong-geng-xin-shu-ju.md)
     * [Create , Select , Delete](shu-ju-ku/postgresql/select.md)
     * [select  jsonb](shu-ju-ku/postgresql/select-jsonb.md)
   * [PostgreSQL XL](shu-ju-ku/postgre-xl/README.md)
