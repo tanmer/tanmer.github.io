@@ -59,5 +59,17 @@ keys *rack::attack*
 del cache:gitlab:rack::attack:allow2ban:ban:182.149.159.201
 ```
 
+### 每周清理Registry数据
+
+当Gitlab集成CI/CD和Docker Registry之后，每次部署时编译Docker镜像都会产生很多文件，时间长了，一些老的镜像过时了，我们会在Gitlab的Registry页面删除他们，可是这个删除动作不会删除服务器上Docker Registry所在目录的数据。`gitlab-ctl`提供了命令行清理Registry的垃圾数据：
+
+{% code-tabs %}
+{% code-tabs-item title="/etc/crontab" %}
+```text
+0  0    * * 1   root    gitlab-ctl registry-garbage-collect
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
 
 
