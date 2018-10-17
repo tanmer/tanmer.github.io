@@ -36,6 +36,8 @@
       * [PostgreSQL中插入数据](shu-ju-ku/postgresql/ji-chu-zhi-shi/ru-he-zai-postgresql-zhong-cha-ru-shu-ju.md)
       * [PostgreSQL中更新数据](shu-ju-ku/postgresql/ji-chu-zhi-shi/ru-he-zai-postgresql-zhong-geng-xin-shu-ju.md)
       * [PostgreSQL中删除数据](shu-ju-ku/postgresql/ji-chu-zhi-shi/postgresql-zhong-shan-chu-shu-ju.md)
+    * [数据库管理](shu-ju-ku/postgresql/shu-ju-ku-guan-li/README.md)
+      * [PostgreSQL中创建表](shu-ju-ku/postgresql/shu-ju-ku-guan-li/postgresql-zhong-chuang-jian-biao.md)
     * [Create , Select , Delete](shu-ju-ku/postgresql/select.md)
     * [select  jsonb](shu-ju-ku/postgresql/select-jsonb.md)
   * [PostgreSQL XL](shu-ju-ku/postgre-xl/README.md)
