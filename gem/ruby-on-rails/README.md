@@ -1,4 +1,2 @@
 # Ruby on Rails
 
-
-
