@@ -52,6 +52,36 @@ ENV LC_COLLATE zh_CN.UTF-8
 
 ```
 
+### Ubuntu安装
+
+```bash
+echo deb http://mirrors.tuna.tsinghua.edu.cn/postgresql/repos/apt/ xenial-pgdg main > /etc/apt/sources.list.d/pgdg.list
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+apt-get update
+apt-get install postgresql-10
+```
+
+更改默认配置
+
+```bash
+# 改变数据目录
+echo data_directory = \'/data/postgresql/10/main\' > /etc/postgresql/10/main/conf.d/tanmer.conf
+# 配置最大连接数
+echo max_connections = 1000 >> /etc/postgresql/10/main/conf.d/tanmer.conf
+# 允许外部主机连接
+echo listen_addresses = \'0.0.0.0\' >> /etc/postgresql/10/main/conf.d/tanmer.conf
+# 允许外部用户用密码登录
+echo host all all 10.103.0.0/24 md5 >> /etc/postgresql/10/main/pg_hba.conf
+# 停止服务
+systemctl stop postgresql
+# 移动数据目录
+mv /var/lib/postgresql /data
+# 启动服务
+systemctl start postgresql
+# 查看服务状态
+systemctl status postgresql
+```
+
 ## 使用
 
 ### 创建用户

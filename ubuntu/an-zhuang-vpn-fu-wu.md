@@ -769,7 +769,7 @@ While the exact applications used to accomplish this transfer will depend on you
 
 Here is an example SFTP command using our client1.ovpn example. This command can be run from your local computer \(OS X or Linux\). It places the .ovpn file in your home directory:
 
-### Step 12: Install the Client Configuration {#step-12-install-the-client-configuration}
+### Step 12: Install the Client Configuration <a id="step-12-install-the-client-configuration"></a>
 
 Now, we'll discuss how to install a client VPN profile on Windows, OS X, iOS, and Android. None of these client instructions are dependent on one another, so feel free to skip to whichever is applicable to you.
 
@@ -789,7 +789,7 @@ The OpenVPN client application for Windows can be found on[ OpenVPN's Downloads 
 
 Towards the end of the installation process, Tunnelblick will ask if you have any configuration files. It can be easier to answer No and let Tunnelblick finish. Open a Finder window and double-click client1.ovpn. Tunnelblick will install the client profile. Administrative privileges are required.
 
-### Step 13: Test Your VPN Connection {#step-13-test-your-vpn-connection}
+### Step 13: Test Your VPN Connection <a id="step-13-test-your-vpn-connection"></a>
 
 Once everything is installed, a simple check confirms everything is working properly. Without having a VPN connection enabled, open a browser and go to [DNSLeakTest](https://www.dnsleaktest.com/).
 
@@ -797,7 +797,7 @@ The site will return the IP address assigned by your internet service provider a
 
 Now connect the OpenVPN client to your Droplet's VPN and refresh the browser. The completely different IP address of your VPN server should now appear. That is now how you appear to the world. Again, DNSLeakTest's Extended Test will check your DNS settings and confirm you are now using the DNS resolvers pushed by your VPN.
 
-### Step 14: Revoking Client Certificates {#step-14-revoking-client-certificates}
+### Step 14: Revoking Client Certificates <a id="step-14-revoking-client-certificates"></a>
 
 Occasionally, you may need to revoke a client certificate to prevent further access to the OpenVPN server.
 
