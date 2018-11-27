@@ -1,7 +1,3 @@
----
-description: How to Update in PostgreSQL
----
-
 # PostgreSQL中更新数据
 
 ```text

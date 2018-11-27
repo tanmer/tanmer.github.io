@@ -1,7 +1,3 @@
----
-description: How to Insert in PostgreSQL
----
-
 # PostgreSQL中插入数据
 
 #### 这是Postgresql最短，最简单插入方法，你只需要按顺序的插入指定的值，所以，如果你有10列，你必须指定10个值。

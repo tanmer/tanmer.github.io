@@ -1,7 +1,3 @@
----
-description: How to Delete in PostgreSQL
----
-
 # PostgreSQL中删除数据
 
 ```text

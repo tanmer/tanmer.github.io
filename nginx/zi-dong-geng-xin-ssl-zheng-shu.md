@@ -16,6 +16,8 @@ sudo certbot --nginx -d example.com -d www.example.com
 
 {% hint style="warning" %}
 注意：此命令会自动搜索出对应的nginx虚拟主机配置文件，然后替换SSL相关的证书地址，执行命令之前，建议先备份配置文件（如：/etc/nginx/site-enabled/example.com）
+
+端口必须是`80` Let's encrpyt不支持80/443端口以外的验证。如果是其他端口，唯一办法就是修改用DNS TXT解析的方法实现。这个不在Certbot工具的功能范围呢。
 {% endhint %}
 
 如果是第一次运行 `certbot`，会提示我们输入email并同意使用协议，这里email建议使用真实地址，方便接收证书过期提示。
